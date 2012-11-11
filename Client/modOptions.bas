@@ -115,8 +115,8 @@ Sub LoadOptions()
                 Next A
             End If
         Else
-            .MIDI = True
-            .Wav = True
+            .MIDI = False
+            .Wav = False
             .Broadcasts = True
             .Windowed = True
             .LightingQuality = 1
