@@ -1,6 +1,11 @@
 Attribute VB_Name = "modConstants"
 Option Explicit
 
+'Game Control Contstants
+Public Const TargetFrameRate = 40
+Public Const TargetFrameTicks = 1000 / TargetFrameRate
+Public Const TargetMoveTicks = TargetFrameTicks * 32
+
 'Editing Mode Constants
 Public ListEditMode As Byte
 Public Const modeObjects = 1

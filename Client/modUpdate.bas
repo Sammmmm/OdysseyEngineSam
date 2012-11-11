@@ -33,27 +33,51 @@ Sub UpdateGame()
         
     'Move you
     If CXO < CX * 32 Then
-        CXO = CXO + CWalkStep
-        If Int(CXO / 16) * 16 = CXO Then
+        'CXO = CXO + CWalkStep
+        D = CXO \ 16
+        CXO = (CX - 1) * 32 + ((timeGetTime - CWalkStart) / (TargetMoveTicks / CWalkStep)) * 32
+        If CXO >= CX * 32 Then
+            CXO = CX * 32
+        End If
+        
+        If CXO \ 16 <> D Then
             CWalk = 1 - CWalk
             If CWalk = 0 Then PlayWav 4
         End If
     ElseIf CXO > CX * 32 Then
-        CXO = CXO - CWalkStep
-        If Int(CXO / 16) * 16 = CXO Then
+        'CXO = CXO - CWalkStep
+        D = CXO \ 16
+        CXO = (CX + 1) * 32 - ((timeGetTime - CWalkStart) / (TargetMoveTicks / CWalkStep)) * 32
+        If CXO <= CX * 32 Then
+            CXO = CX * 32
+        End If
+        
+        If CXO \ 16 <> D Then
             CWalk = 1 - CWalk
             If CWalk = 0 Then PlayWav 4
         End If
     End If
     If CYO < CY * 32 Then
-        CYO = CYO + CWalkStep
-        If Int(CYO / 16) * 16 = CYO Then
+        'CYO = CYO + CWalkStep
+        D = CYO \ 16
+        CYO = (CY - 1) * 32 + ((timeGetTime - CWalkStart) / (TargetMoveTicks / CWalkStep)) * 32
+        If CYO >= CY * 32 Then
+            CYO = CY * 32
+        End If
+        
+        If CYO \ 16 <> D Then
             CWalk = 1 - CWalk
             If CWalk = 0 Then PlayWav 4
         End If
     ElseIf CYO > CY * 32 Then
-        CYO = CYO - CWalkStep
-        If Int(CYO / 16) * 16 = CYO Then
+        'CYO = CYO - CWalkStep
+        D = CYO \ 16
+        CYO = (CY + 1) * 32 - ((timeGetTime - CWalkStart) / (TargetMoveTicks / CWalkStep)) * 32
+        If CYO <= CY * 32 Then
+            CYO = CY * 32
+        End If
+        
+        If CYO \ 16 <> D Then
             CWalk = 1 - CWalk
             If CWalk = 0 Then PlayWav 4
         End If

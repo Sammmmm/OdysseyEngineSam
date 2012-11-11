@@ -38,11 +38,8 @@ Attribute CX.VB_VarUserMemId = 1073741843
 Attribute CY.VB_VarUserMemId = 1073741843
 Attribute CMap.VB_VarUserMemId = 1073741843
 Attribute CMap2.VB_VarUserMemId = 1073741843
-Public CXO As Long, CYO As Long, CDir As Byte, CWalkStep As Long
+Public CXO As Long, CYO As Long, CDir As Byte, CWalkStep As Long, CWalkStart As Long
 Attribute CXO.VB_VarUserMemId = 1073741847
-Attribute CYO.VB_VarUserMemId = 1073741847
-Attribute CDir.VB_VarUserMemId = 1073741847
-Attribute CWalkStep.VB_VarUserMemId = 1073741847
 Public CAttack As Long, CWalk As Long
 Attribute CAttack.VB_VarUserMemId = 1073741851
 Attribute CWalk.VB_VarUserMemId = 1073741851

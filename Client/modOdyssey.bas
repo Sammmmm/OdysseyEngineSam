@@ -1063,6 +1063,7 @@ Sub CheckKeys()
                     If IsVacant(CX, CY - 1) Then
                         If NoDirectionalWalls(CX, CY, 0) Then
                             CY = CY - 1
+                            CWalkStart = timeGetTime
                             MoveToTile
                         End If
                     End If
@@ -1086,6 +1087,7 @@ Sub CheckKeys()
                     If IsVacant(CX, CY + 1) Then
                         If NoDirectionalWalls(CX, CY, 1) Then
                             CY = CY + 1
+                            CWalkStart = timeGetTime
                             MoveToTile
                         End If
                     End If
@@ -1109,6 +1111,7 @@ Sub CheckKeys()
                     If IsVacant(CX - 1, CY) Then
                         If NoDirectionalWalls(CX, CY, 2) Then
                             CX = CX - 1
+                            CWalkStart = timeGetTime
                             MoveToTile
                         End If
                     End If
@@ -1132,6 +1135,7 @@ Sub CheckKeys()
                     If IsVacant(CX + 1, CY) Then
                         If NoDirectionalWalls(CX, CY, 3) Then
                             CX = CX + 1
+                            CWalkStart = timeGetTime
                             MoveToTile
                         End If
                     End If
@@ -1468,7 +1472,7 @@ Sub Main()
             AlternateFrameCounter = 0
             CurFrame = 1 - CurFrame
         End If
-        If Tick > SecondTimer Then
+        If Tick >= SecondTimer Then
             SecondTimer = Tick + 1000
             FrameRate = FrameCounter
             FrameCounter = 0
@@ -1511,8 +1515,8 @@ Sub Main()
                 If SpeedStrikes > 0 Then SpeedStrikes = SpeedStrikes - 1
             End If
             If Freeze = False Then
-                CheckKeys
                 UpdateGame
+                CheckKeys
                 DrawNextFrame
             End If
             If Tick > SendSpeedHack Then
@@ -1525,7 +1529,7 @@ Sub Main()
                 SendPing = Tick + 15000
             End If
         End If
-        While timeGetTime - Tick < 26
+        While timeGetTime - Tick < TargetFrameTicks
             If MyDoEvents <> 0 Then
                 DoEvents
             End If
