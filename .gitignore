@@ -1,4 +1,5 @@
 *.log
 *.nodist
+*.ini
 ody.exe
 Default/

@@ -8,7 +8,6 @@ Begin VB.Form frmAccount
    ClientTop       =   360
    ClientWidth     =   5460
    ControlBox      =   0   'False
-   Icon            =   "frmAccount.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
@@ -101,7 +100,7 @@ Begin VB.Form frmAccount
    Begin VB.Label Label4 
       Alignment       =   2  'Center
       BackColor       =   &H0061514B&
-      Caption         =   $"frmAccount.frx":0E42
+      Caption         =   $"frmAccount.frx":0000
       BeginProperty Font 
          Name            =   "Times New Roman"
          Size            =   8.25

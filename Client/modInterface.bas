@@ -9,8 +9,6 @@ Public Sub SetObjectInfo(Info As String)
 End Sub
 
 Public Sub SetLocation(Location As String)
-    If frmMain.Visible = False Then Exit Sub
-
     frmMain.lblLocation.Caption = Location
     frmMain.lblLocationShadow.Caption = Location
 End Sub
