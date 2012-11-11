@@ -11,7 +11,6 @@ Type OptionsData
     HighPriority As Boolean
     DisablePlayerLights As Boolean
     DisableLighting As Boolean
-    LegacyMovement As Boolean
 End Type
 
 Public options As OptionsData
@@ -53,11 +52,6 @@ Sub SaveOptions()
             WriteString "Options", "DisableLighting", "1"
         Else
             WriteString "Options", "DisableLighting", "0"
-        End If
-        If .LegacyMovement = True Then
-            WriteString "Options", "LegacyMovement", "1"
-        Else
-            WriteString "Options", "LegacyMovement", "0"
         End If
         WriteString "Options", "LightingQuality", CStr(.LightingQuality)
         If Character.name <> "" Then
@@ -111,13 +105,6 @@ Sub LoadOptions()
             Else
                 .DisableLighting = False
             End If
-            
-            If ReadInt("Options", "LegacyMovement") = 1 Then
-                .LegacyMovement = True
-            Else
-                .LegacyMovement = False
-            End If
-            
             .LightingQuality = ReadInt("Options", "LightingQuality")
             If Character.name <> "" Then
                 Dim A As Long
@@ -136,7 +123,6 @@ Sub LoadOptions()
             .HighPriority = False
             .DisablePlayerLights = False
             .DisableLighting = False
-            .LegacyMovement = False
             SaveOptions
         End If
     End With
