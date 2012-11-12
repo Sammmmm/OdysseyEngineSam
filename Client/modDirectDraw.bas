@@ -221,15 +221,21 @@ Public Sub Draw(X As Long, Y As Long, Width As Integer, Height As Integer, Surfa
     DrawRect.Right = SrcX + Width
     DrawRect.Bottom = SrcY + Height
 
+    'cant draw negative coords so trim the source
+    If X < 0 Then DrawRect.Left = DrawRect.Left - X
+    If Y < 0 Then DrawRect.Top = DrawRect.Top - Y
+    If X > (384 - Width) Then DrawRect.Right = DrawRect.Right - X + 384 - Width
+    If Y > (384 - Height) Then DrawRect.Bottom = DrawRect.Bottom - Y + 384 - Height
+
     If Y < 0 Then
         DrawRect.Top = DrawRect.Top - Y
         Y = 0
     End If
 
     If Transparent = True Then
-        Call BackBufferSurf.BltFast(X, Y, Surface, DrawRect, DDBLTFAST_SRCCOLORKEY)
+        Call BackBufferSurf.BltFast(IIf(X < 0, 0, X), Y, Surface, DrawRect, DDBLTFAST_SRCCOLORKEY)
     Else
-        Call BackBufferSurf.BltFast(X, Y, Surface, DrawRect, DDBLTFAST_NOCOLORKEY)
+        Call BackBufferSurf.BltFast(IIf(X < 0, 0, X), Y, Surface, DrawRect, DDBLTFAST_NOCOLORKEY)
     End If
 End Sub
 

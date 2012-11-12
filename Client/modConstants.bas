@@ -8,6 +8,7 @@ Public Const TargetMoveTicks = 3200 '(must be adjusted if default cwalksteps are
 
 Public Const MonsterWalkSpeed = 8
 Public Const MonsterRunSpeed = 16
+Public Const ProjectileSpeed = 32
 
 'Editing Mode Constants
 Public ListEditMode As Byte

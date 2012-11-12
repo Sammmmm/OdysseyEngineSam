@@ -244,36 +244,37 @@ Sub UpdateGame()
                         .TimeStamp = Tick
                     End If
                 Case pttProject
-                    If Tick - .TimeStamp >= .speed Then
-                        If .X = .TargetX And .Y = .TargetY Then
-                            If .TotalFrames > 0 Then
-                                If .Frame < .TotalFrames Then
-                                    .Frame = .Frame + 1
-                                Else
-                                    If .EndSound > 0 Then PlayWav .EndSound
-                                    DestroyEffect A
-                                End If
+                    If (.X = .TargetX And .Y = .TargetY) Or (.X < -32 Or .Y < -16 Or .X > 12 * 32 + 16 Or .Y > 12 * 32 + 16) Then
+                        If .TotalFrames > 0 Then
+                            If .Frame < .TotalFrames Then
+                                .Frame = .Frame + 1
                             Else
                                 If .EndSound > 0 Then PlayWav .EndSound
                                 DestroyEffect A
                             End If
                         Else
-                            If .X < .TargetX Then .X = .X + 8
-                            If .X > .TargetX Then .X = .X - 8
-                            If .Y < .TargetY Then .Y = .Y + 8
-                            If .Y > .TargetY Then .Y = .Y - 8
-                            If .Alternate = True Then
-                                Select Case .Type
-                                Case 2
-                                    .offset = 1 - .offset
-                                    .Frame = .offset
-                                Case 4
-                                    If .offset = 3 Then .offset = 0 Else .offset = .offset + 1
-                                    .Frame = .offset
-                                End Select
-                            End If
-                            C = (.X / 32)
-                            D = (.Y / 32)
+                            If .EndSound > 0 Then PlayWav .EndSound
+                            DestroyEffect A
+                        End If
+                    Else
+                        If .Direction = 3 Then .X = (.SourceX * 32) + ((timeGetTime - .StartTime) / (TargetMoveTicks / .speed)) * 32
+                        If .Direction = 2 Then .X = (.SourceX * 32) - ((timeGetTime - .StartTime) / (TargetMoveTicks / .speed)) * 32
+                        If .Direction = 1 Then .Y = (.SourceY * 32) + ((timeGetTime - .StartTime) / (TargetMoveTicks / .speed)) * 32
+                        If .Direction = 0 Then .Y = (.SourceY * 32) - ((timeGetTime - .StartTime) / (TargetMoveTicks / .speed)) * 32
+                        If .Alternate = True Then
+                            Select Case .Type
+                            Case 2
+                                .offset = 1 - .offset
+                                .Frame = .offset
+                            Case 4
+                                If .offset = 3 Then .offset = 0 Else .offset = .offset + 1
+                                .Frame = .offset
+                            End Select
+                        End If
+                        C = (.X / 32)
+                        D = (.Y / 32)
+                        
+                        If (C >= 0 And C <= 11 And D >= 0 And D <= 11) Then
                             'Projectile Collision
                             Select Case Map.Tile(C, D).Att
                             Case 1, 2, 3, 14, 16
@@ -295,84 +296,79 @@ Sub UpdateGame()
                                 .TargetX = .X
                                 .TargetY = .Y
                             End Select
-                            Dim Direction As Byte
-                            If .X < .TargetX Then Direction = 3
-                            If .X > .TargetX Then Direction = 2
-                            If .Y < .TargetY Then Direction = 1
-                            If .Y > .TargetY Then Direction = 0
-                            If NoDirectionalWalls(CByte(.X / 32), CByte(.Y / 32), Direction) = False Then
+                            
+                            If NoDirectionalWalls(CByte(.X / 32), CByte(.Y / 32), .Direction) = False Then
                                 .TargetX = .X
                                 .TargetY = .Y
                             End If
-
-                            For B = 0 To MaxMonsters
-                                If Map.Monster(B).X = C Then
-                                    If Map.Monster(B).Y = D Then
-                                        If Map.Monster(B).Monster > 0 Then
-                                            If .Creator = Character.index Then
-                                                If .Damage > 0 Then
-                                                    TempVar = (CMap + CX + CY) Mod 250
-                                                    If .Magic > 0 Then
-                                                        'Magic Projectile
-                                                        TempStr = Chr$(TempVar) + Chr$(1) + Chr$(B) + Chr$(.Damage)
-                                                        SendSocket Chr$(79) + Chr$(CheckSum(TempStr) Mod 256) + TempStr
-                                                    Else
-                                                        'Normal Projectile
-                                                        TempStr = Chr$(TempVar) + Chr$(2) + Chr$(B) + Chr$(.Damage)
-                                                        SendSocket Chr$(79) + Chr$(CheckSum(TempStr) Mod 256) + TempStr
-                                                    End If
+                        End If
+                        For B = 0 To MaxMonsters
+                            If Map.Monster(B).X = C Then
+                                If Map.Monster(B).Y = D Then
+                                    If Map.Monster(B).Monster > 0 Then
+                                        If .Creator = Character.index Then
+                                            If .Damage > 0 Then
+                                                TempVar = (CMap + CX + CY) Mod 250
+                                                If .Magic > 0 Then
+                                                    'Magic Projectile
+                                                    TempStr = Chr$(TempVar) + Chr$(1) + Chr$(B) + Chr$(.Damage)
+                                                    SendSocket Chr$(79) + Chr$(CheckSum(TempStr) Mod 256) + TempStr
                                                 Else
-                                                    SendSocket Chr$(73) & Chr$(B)
+                                                    'Normal Projectile
+                                                    TempStr = Chr$(TempVar) + Chr$(2) + Chr$(B) + Chr$(.Damage)
+                                                    SendSocket Chr$(79) + Chr$(CheckSum(TempStr) Mod 256) + TempStr
                                                 End If
+                                            Else
+                                                SendSocket Chr$(73) & Chr$(B)
                                             End If
-
-                                            .TargetX = .X
-                                            .TargetY = .Y
                                         End If
+
+                                        .TargetX = .X
+                                        .TargetY = .Y
                                     End If
                                 End If
-                            Next B
-                            For B = 1 To MaxUsers
-                                If Player(B).X = C Then
-                                    If Player(B).Y = D Then
-                                        If Player(B).Map = CMap Then
-                                            If Not B = .Creator Then
-                                                If Player(B).IsDead = False Then
-                                                    Dim Collide As Boolean
-                                                    If Character.Guild > 0 Then
-                                                        If Player(B).Guild = 0 Then
-                                                            If ExamineBit(Map.flags, 0) = False And ExamineBit(Map.flags, 6) = False Then
+                            End If
+                        Next B
+                        For B = 1 To MaxUsers
+                            If Player(B).X = C Then
+                                If Player(B).Y = D Then
+                                    If Player(B).Map = CMap Then
+                                        If Not B = .Creator Then
+                                            If Player(B).IsDead = False Then
+                                                Dim Collide As Boolean
+                                                If Character.Guild > 0 Then
+                                                    If Player(B).Guild = 0 Then
+                                                        If ExamineBit(Map.flags, 0) = False And ExamineBit(Map.flags, 6) = False Then
 
-                                                            Else
-                                                                Collide = True
-                                                            End If
                                                         Else
                                                             Collide = True
                                                         End If
                                                     Else
                                                         Collide = True
                                                     End If
-                                                    If Collide = True Then
-                                                        .TargetX = .X
-                                                        .TargetY = .Y
-                                                        If .Creator = Character.index Then
-                                                            If .Damage > 0 Then
-                                                                TempVar = CMap Mod 250
+                                                Else
+                                                    Collide = True
+                                                End If
+                                                If Collide = True Then
+                                                    .TargetX = .X
+                                                    .TargetY = .Y
+                                                    If .Creator = Character.index Then
+                                                        If .Damage > 0 Then
+                                                            TempVar = CMap Mod 250
 
-                                                                If .Magic > 0 Then
-                                                                    'Magic Projectile
-                                                                    TempStr = Chr$(TempVar) + Chr$(3) + Chr$(B) + Chr$(.Damage)
-                                                                    SendSocket Chr$(79) + Chr$(CheckSum(TempStr) Mod 256) + TempStr
-                                                                    Exit For
-                                                                Else
-                                                                    'Normal Projectile
-                                                                    TempStr = Chr$(TempVar) + Chr$(4) + Chr$(B) + Chr$(.Damage)
-                                                                    SendSocket Chr$(79) + Chr$(CheckSum(TempStr) Mod 256) + TempStr
-                                                                    Exit For
-                                                                End If
+                                                            If .Magic > 0 Then
+                                                                'Magic Projectile
+                                                                TempStr = Chr$(TempVar) + Chr$(3) + Chr$(B) + Chr$(.Damage)
+                                                                SendSocket Chr$(79) + Chr$(CheckSum(TempStr) Mod 256) + TempStr
+                                                                Exit For
                                                             Else
-                                                                SendSocket Chr$(74) & Chr$(B)
+                                                                'Normal Projectile
+                                                                TempStr = Chr$(TempVar) + Chr$(4) + Chr$(B) + Chr$(.Damage)
+                                                                SendSocket Chr$(79) + Chr$(CheckSum(TempStr) Mod 256) + TempStr
+                                                                Exit For
                                                             End If
+                                                        Else
+                                                            SendSocket Chr$(74) & Chr$(B)
                                                         End If
                                                     End If
                                                 End If
@@ -380,18 +376,18 @@ Sub UpdateGame()
                                         End If
                                     End If
                                 End If
-                            Next B
-                            If CX = C Then
-                                If CY = D Then
-                                    If Not .Creator = Character.index Then
-                                        .TargetX = .X
-                                        .TargetY = .Y
-                                    End If
+                            End If
+                        Next B
+                        If CX = C Then
+                            If CY = D Then
+                                If Not .Creator = Character.index Then
+                                    .TargetX = .X
+                                    .TargetY = .Y
                                 End If
                             End If
                         End If
-                        .TimeStamp = Tick
                     End If
+                    .TimeStamp = Tick
                 End Select
             End If
         End With

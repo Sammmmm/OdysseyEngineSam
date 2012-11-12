@@ -2026,8 +2026,9 @@ Sub CreateProjectile(Direction As Byte, StartX As Byte, StartY As Byte, TheType 
     For A = 1 To MaxProjectiles
         With Projectile(A)
             If .Sprite = 0 Then
+                .StartTime = timeGetTime
                 .TargetType = pttProject
-                .speed = 1
+                .speed = ProjectileSpeed
                 .SourceX = StartX
                 .SourceY = StartY
                 .X = StartX * 32
@@ -2035,6 +2036,7 @@ Sub CreateProjectile(Direction As Byte, StartX As Byte, StartY As Byte, TheType 
                 .Creator = Creator
                 .Damage = Damage
                 .Magic = Magic
+                .Direction = Direction
                 Exit For
             End If
         End With
@@ -2044,15 +2046,15 @@ Sub CreateProjectile(Direction As Byte, StartX As Byte, StartY As Byte, TheType 
         Select Case Direction
         Case 0    'Up
             .TargetX = StartX * 32
-            .TargetY = 0
+            .TargetY = -16
         Case 1    'Down
             .TargetX = StartX * 32
-            .TargetY = 11 * 32
+            .TargetY = 12 * 32 + 16
         Case 2    'Left
-            .TargetX = 0
+            .TargetX = -32
             .TargetY = StartY * 32
         Case 3    'Right
-            .TargetX = 11 * 32
+            .TargetX = 12 * 32 + 16
             .TargetY = StartY * 32
         End Select
 

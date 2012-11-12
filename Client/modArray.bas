@@ -51,6 +51,8 @@ Type ProjectileData
     Magic As Byte
     Damage As Byte
     Alternate As Boolean
+    StartTime As Long
+    Direction As Byte
 End Type
 
 Type PlayerData
