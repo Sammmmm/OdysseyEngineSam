@@ -4,7 +4,7 @@ Option Explicit
 'Game Control Contstants
 Public Const TargetFrameRate = 40
 Public Const TargetFrameTicks = 1000 / TargetFrameRate
-Public Const TargetMoveTicks = TargetFrameTicks * 32
+Public Const TargetMoveTicks = 3200 '(must be adjusted if default cwalksteps are adjusted)
 
 'Editing Mode Constants
 Public ListEditMode As Byte
@@ -30,7 +30,7 @@ Public Const MaxHalls = 255
 Public Const MaxModifications = 255
 Public Const MaxTotalMonsters = 1000
 Public Const MaxObjects = 1000
-Public Const MaxAtt = 23
+Public Const MaxAtt = 25
 Public Const NumClasses = 4
 Public Const MaxUsers = 80
 Public Const MaxProjectiles = 20

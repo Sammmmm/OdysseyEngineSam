@@ -539,7 +539,7 @@ Sub MoveToTile()
     Character.LastMove = Tick
     SendSocket Chr$(7) + Chr$(CX) + Chr$(CY) + Chr$(CDir) + Chr$(CWalkStep)
 
-    If CWalkStep = 4 Then
+    If keyShift = True Then
         If GetEnergy > 0 Then SetEnergy GetEnergy - 1
         DrawStats
     End If
@@ -1045,17 +1045,25 @@ Sub CheckKeys()
     End If
     If CX * 32 = CXO And CY * 32 = CYO Then
         If Character.Access = 0 Or keyAlt = True Then
-            If CWalkStep > 4 And Character.Access = 0 Then
+            If CWalkStep ^ 2 + 16 <> CWalkStep2 And Character.Access = 0 Then
                 SendSocket Chr$(68) + "Walk Hack"
                 Exit Sub
             End If
             If keyShift = True And GetEnergy > 0 Then
-                CWalkStep = 4
+                If Map.Tile(CX, CY).Att = 24 Then 'speed tile
+                    CWalkStep = Map.Tile(CX, CY).AttData(1): CWalkStep2 = CWalkStep ^ 2 + 16
+                Else
+                    CWalkStep = 16: CWalkStep2 = CWalkStep ^ 2 + 16
+                End If
             Else
-                CWalkStep = 2
+                If Map.Tile(CX, CY).Att = 24 Then 'speed tile
+                    CWalkStep = Map.Tile(CX, CY).AttData(0): CWalkStep2 = CWalkStep ^ 2 + 16
+                Else
+                    CWalkStep = 8: CWalkStep2 = CWalkStep ^ 2 + 16
+                End If
             End If
         Else
-            CWalkStep = 16
+            CWalkStep = 31: CWalkStep2 = CWalkStep ^ 2 + 16
         End If
         If keyUp = True Then
             If CDir = 0 Then

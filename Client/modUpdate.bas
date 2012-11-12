@@ -12,19 +12,19 @@ Sub UpdateGame()
                 If Not .status = 25 Then
                     If .Sprite <= MaxSprite Then
                         'Move Player
-                        If .xO < .X * 32 Then
-                            .xO = .xO + .WalkStep
-                            If Int(.xO / 16) * 16 = .xO Then .W = 1 - .W
-                        ElseIf .xO > .X * 32 Then
-                            .xO = .xO - .WalkStep
-                            If Int(.xO / 16) * 16 = .xO Then .W = 1 - .W
+                        If .XO < .X * 32 Then
+                            .XO = .XO + .WalkStep
+                            If Int(.XO / 16) * 16 = .XO Then .W = 1 - .W
+                        ElseIf .XO > .X * 32 Then
+                            .XO = .XO - .WalkStep
+                            If Int(.XO / 16) * 16 = .XO Then .W = 1 - .W
                         End If
-                        If .yO < .Y * 32 Then
-                            .yO = .yO + .WalkStep
-                            If Int(.yO / 16) * 16 = .yO Then .W = 1 - .W
-                        ElseIf .yO > .Y * 32 Then
-                            .yO = .yO - .WalkStep
-                            If Int(.yO / 16) * 16 = .yO Then .W = 1 - .W
+                        If .YO < .Y * 32 Then
+                            .YO = .YO + .WalkStep
+                            If Int(.YO / 16) * 16 = .YO Then .W = 1 - .W
+                        ElseIf .YO > .Y * 32 Then
+                            .YO = .YO - .WalkStep
+                            If Int(.YO / 16) * 16 = .YO Then .W = 1 - .W
                         End If
                     End If
                 End If
@@ -90,35 +90,35 @@ Sub UpdateGame()
             If .Monster > 0 Then
                 C = Monster(.Monster).Sprite
                 If C > 0 And C <= MaxSprite Then
-                    If .xO < .X * 32 Then
+                    If .XO < .X * 32 Then
                         If ExamineBit(Monster(.Monster).flags, 2) = False Then 'Not runner
-                            .xO = .xO + 2
+                            .XO = .XO + 2
                         Else
-                            .xO = .xO + 4
+                            .XO = .XO + 4
                         End If
-                        If Int(.xO / 16) * 16 = .xO Then .W = 1 - .W
-                    ElseIf .xO > .X * 32 Then
+                        If Int(.XO / 16) * 16 = .XO Then .W = 1 - .W
+                    ElseIf .XO > .X * 32 Then
                         If ExamineBit(Monster(.Monster).flags, 2) = False Then 'Not runner
-                            .xO = .xO - 2
+                            .XO = .XO - 2
                         Else
-                            .xO = .xO - 4
+                            .XO = .XO - 4
                         End If
-                        If Int(.xO / 16) * 16 = .xO Then .W = 1 - .W
+                        If Int(.XO / 16) * 16 = .XO Then .W = 1 - .W
                     End If
-                    If .yO < .Y * 32 Then
+                    If .YO < .Y * 32 Then
                         If ExamineBit(Monster(.Monster).flags, 2) = False Then 'Not runner
-                            .yO = .yO + 2
+                            .YO = .YO + 2
                         Else
-                            .yO = .yO + 4
+                            .YO = .YO + 4
                         End If
-                        If Int(.yO / 16) * 16 = .yO Then .W = 1 - .W
-                    ElseIf .yO > .Y * 32 Then
+                        If Int(.YO / 16) * 16 = .YO Then .W = 1 - .W
+                    ElseIf .YO > .Y * 32 Then
                         If ExamineBit(Monster(.Monster).flags, 2) = False Then 'Not runner
-                            .yO = .yO - 2
+                            .YO = .YO - 2
                         Else
-                            .yO = .yO - 4
+                            .YO = .YO - 4
                         End If
-                        If Int(.yO / 16) * 16 = .yO Then .W = 1 - .W
+                        If Int(.YO / 16) * 16 = .YO Then .W = 1 - .W
                     End If
                 End If
             End If
@@ -136,8 +136,8 @@ Sub UpdateGame()
                         .X = CXO
                         .Y = CYO
                     Else
-                        .X = Player(.TargetNum).xO
-                        .Y = Player(.TargetNum).yO
+                        .X = Player(.TargetNum).XO
+                        .Y = Player(.TargetNum).YO
                     End If
 
                     If Tick - .TimeStamp >= .speed Then
@@ -161,8 +161,8 @@ Sub UpdateGame()
                         .TargetX = CXO
                         .TargetY = CYO
                     Else
-                        .TargetX = Player(.TargetNum).xO
-                        .TargetY = Player(.TargetNum).yO
+                        .TargetX = Player(.TargetNum).XO
+                        .TargetY = Player(.TargetNum).YO
                     End If
                     If .X < .TargetX Then .X = .X + 8
                     If .X > .TargetX Then .X = .X - 8
@@ -182,8 +182,8 @@ Sub UpdateGame()
                         .TimeStamp = Tick
                     End If
                 Case pttMonster
-                    .TargetX = Map.Monster(.TargetNum).xO
-                    .TargetY = Map.Monster(.TargetNum).yO
+                    .TargetX = Map.Monster(.TargetNum).XO
+                    .TargetY = Map.Monster(.TargetNum).YO
                     If .X < .TargetX Then .X = .X + 8
                     If .X > .TargetX Then .X = .X - 8
                     If .Y < .TargetY Then .Y = .Y + 8
@@ -414,13 +414,13 @@ Sub DrawNextFrame()
                         End If
 
                         If Player(A).IsDead Then
-                            Draw .xO, .yO, 32, 32, DDSTiles, (623 Mod 7) * 32, (623 / 7) * 32, True
+                            Draw .XO, .YO, 32, 32, DDSTiles, (623 Mod 7) * 32, (623 / 7) * 32, True
                         Else
-                            Draw .xO, .yO - 16, 32, 32, DDSSprites, B * 32, (.Sprite - 1) * 32, True
+                            Draw .XO, .YO - 16, 32, 32, DDSSprites, B * 32, (.Sprite - 1) * 32, True
                             If Player(A).HP > 0 Then
                                 If Not Player(A).HP = Player(A).MaxHP Then
-                                    Draw .xO + 3, .yO - 16, 2, 26, DDSHPBar, 0, 4, False
-                                    Draw .xO + 3, .yO - 16, 2, 26 - (Player(A).HP / Player(A).MaxHP) * 26, DDSHPBar, 2, 4, False
+                                    Draw .XO + 3, .YO - 16, 2, 26, DDSHPBar, 0, 4, False
+                                    Draw .XO + 3, .YO - 16, 2, 26 - (Player(A).HP / Player(A).MaxHP) * 26, DDSHPBar, 2, 4, False
                                 End If
                             End If
                         End If
@@ -456,13 +456,13 @@ Sub DrawNextFrame()
                     Else
                         B = .D * 3 + .W
                     End If
-                    Draw .xO, .yO - 16, 32, 32, DDSSprites, B * 32, (C - 1) * 32, True
+                    Draw .XO, .YO - 16, 32, 32, DDSSprites, B * 32, (C - 1) * 32, True
                     
                     If .HPBar = True Or Character.Access > 0 Then
-                        Draw .xO + 3, .yO - 20, 26, 2, DDSHPBar, 0, 0, False
+                        Draw .XO + 3, .YO - 20, 26, 2, DDSHPBar, 0, 0, False
                         E = (.Life / Monster(.Monster).MaxLife)
                         If E > 1 Then E = 1
-                        Draw .xO + 3, .yO - 20, E * 26, 2, DDSHPBar, 0, 2, False
+                        Draw .XO + 3, .YO - 20, E * 26, 2, DDSHPBar, 0, 2, False
                     End If
                 End If
             End If
@@ -527,10 +527,10 @@ Sub DrawNextFrame()
                     If .status = 9 Or .status = 25 Then
 
                     Else
-                        r.Left = .xO - 32
-                        r.Right = .xO + 64
-                        r.Top = .yO - 32
-                        r.Bottom = .yO - 16
+                        r.Left = .XO - 32
+                        r.Right = .XO + 64
+                        r.Top = .YO - 32
+                        r.Bottom = .YO - 16
 
                         If .status = 1 And CurFrame = 0 Then
                             Draw3dText hdcBuffer, r, .name, QBColor(4), 2
@@ -863,7 +863,7 @@ Sub DrawMapTile(Map As MapData, X As Byte, Y As Byte)
             End If
         End If
         
-        If EditMode >= 6 Then
+        If EditMode >= 6 And MapEdit Then
             If .Att2 > 0 Then
                 DrawAtt FGTileBuffer, .Att2, X, Y, 12, 12
                 DrawAtt FGTile2Buffer, .Att2, X, Y, 12, 12
@@ -879,29 +879,29 @@ Sub DrawMapTile(Map As MapData, X As Byte, Y As Byte)
     End With
 End Sub
 
-Sub DrawTile(ByRef surface As DirectDrawSurface4, tileIndex As Integer, X As Byte, Y As Byte, _
+Sub DrawTile(ByRef Surface As DirectDrawSurface4, tileIndex As Integer, X As Byte, Y As Byte, _
     Optional trimLeft As Long = 0, Optional trimRight As Long = 0, Optional trimTop As Long = 0, Optional trimBottom As Long = 0)
     
     TileSource.Left = (((tileIndex - 1) Mod 7) * 32) + trimLeft
     TileSource.Top = (Int((tileIndex - 1) / 7) * 32) + trimTop
     TileSource.Right = (((tileIndex - 1) Mod 7) * 32) + 32 - trimRight
     TileSource.Bottom = (Int((tileIndex - 1) / 7) * 32) + 32 - trimBottom
-    Call surface.BltFast(X * 32 + trimLeft, Y * 32 + trimTop, DDSTiles, TileSource, DDBLTFAST_SRCCOLORKEY)
+    Call Surface.BltFast(X * 32 + trimLeft, Y * 32 + trimTop, DDSTiles, TileSource, DDBLTFAST_SRCCOLORKEY)
 End Sub
 
-Sub DrawObject(ByRef surface As DirectDrawSurface4, objectIndex As Long, X As Byte, Y As Byte)
+Sub DrawObject(ByRef Surface As DirectDrawSurface4, objectIndex As Long, X As Byte, Y As Byte)
     TileSource.Left = 0
     TileSource.Top = (objectIndex - 1) * 32
     TileSource.Right = TileSource.Left + 32
     TileSource.Bottom = TileSource.Top + 32
-    Call surface.BltFast(X * 32, Y * 32, DDSObjects, TileSource, DDBLTFAST_SRCCOLORKEY)
+    Call Surface.BltFast(X * 32, Y * 32, DDSObjects, TileSource, DDBLTFAST_SRCCOLORKEY)
 End Sub
 
-Sub DrawAtt(ByRef surface As DirectDrawSurface4, attIndex As Byte, X As Byte, Y As Byte, xO As Long, yO As Long)
+Sub DrawAtt(ByRef Surface As DirectDrawSurface4, attIndex As Byte, X As Byte, Y As Byte, XO As Long, YO As Long)
     TileSource.Left = ((attIndex - 1) Mod 7) * 32 + 8
     TileSource.Top = Int((attIndex - 1) / 7) * 32 + 8
     TileSource.Right = TileSource.Left + 16
     TileSource.Bottom = TileSource.Top + 16
-    Call surface.BltFast(X * 32 + xO, Y * 32 + yO, DDSAtts, TileSource, DDBLTFAST_SRCCOLORKEY)
+    Call Surface.BltFast(X * 32 + XO, Y * 32 + YO, DDSAtts, TileSource, DDBLTFAST_SRCCOLORKEY)
 End Sub
 

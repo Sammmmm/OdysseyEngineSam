@@ -135,7 +135,7 @@ Sub ProcessString(PacketID As Long, St As String)
         If frmWait_Loaded = True Then Unload frmWait
         If frmLogin_Loaded = True Then Unload frmLogin
         If frmNewCharacter_Loaded = True Then Unload frmNewCharacter
-        CWalkStep = 0
+        CWalkStep = 0: CWalkStep2 = CWalkStep ^ 2 + 16
         If Len(St) >= 10 Then
             With Character
                 .name = vbNullString
@@ -1306,7 +1306,7 @@ Sub ProcessString(PacketID As Long, St As String)
             If Character.Access > 0 Then
                 Character.status = 3
             Else
-                CWalkStep = 4
+                CWalkStep = 16: CWalkStep2 = CWalkStep ^ 2 + 16
                 Character.status = 0
             End If
         End If

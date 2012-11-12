@@ -14,392 +14,66 @@ Begin VB.Form frmMapAtt
    ScaleHeight     =   3090
    ScaleWidth      =   4860
    StartUpPosition =   2  'CenterScreen
-   Begin VB.PictureBox picAtt23 
+   Begin VB.PictureBox picatt24 
       Height          =   1815
       Left            =   120
       ScaleHeight     =   1755
       ScaleWidth      =   4035
-      TabIndex        =   76
+      TabIndex        =   83
       Top             =   600
       Visible         =   0   'False
       Width           =   4095
-      Begin VB.CheckBox chkAtt23 
-         Caption         =   "unchecked checked boxes become invisible"
-         Height          =   195
-         Index           =   5
-         Left            =   120
-         TabIndex        =   82
-         Top             =   1440
-         Width           =   3855
-      End
-      Begin VB.CheckBox chkAtt23 
-         Caption         =   "Background checked boxes become invisible"
-         Height          =   195
-         Index           =   4
-         Left            =   120
-         TabIndex        =   81
-         Top             =   1200
-         Width           =   3855
-      End
-      Begin VB.CheckBox chkAtt23 
-         Caption         =   "Background"
+      Begin VB.HScrollBar sclWalk 
          Height          =   255
-         Index           =   3
-         Left            =   2040
-         TabIndex        =   80
-         Top             =   720
-         Width           =   1215
-      End
-      Begin VB.CheckBox chkAtt23 
-         Caption         =   "Background"
-         Height          =   255
-         Index           =   2
-         Left            =   600
-         TabIndex        =   79
-         Top             =   720
-         Width           =   1215
-      End
-      Begin VB.CheckBox chkAtt23 
-         Caption         =   "Background"
-         Height          =   255
-         Index           =   1
-         Left            =   600
-         TabIndex        =   78
+         Left            =   1200
+         Max             =   31
+         TabIndex        =   85
          Top             =   240
-         Width           =   1215
+         Value           =   8
+         Width           =   2415
       End
-      Begin VB.CheckBox chkAtt23 
-         Caption         =   "Background"
+      Begin VB.HScrollBar sclRun 
          Height          =   255
-         Index           =   0
-         Left            =   2040
-         TabIndex        =   77
+         Left            =   1200
+         Max             =   31
+         TabIndex        =   84
+         Top             =   600
+         Value           =   16
+         Width           =   2415
+      End
+      Begin VB.Label Label11 
+         Caption         =   "Run Speed"
+         Height          =   255
+         Left            =   120
+         TabIndex        =   89
+         Top             =   600
+         Width           =   855
+      End
+      Begin VB.Label Label9 
+         Caption         =   "Walk Speed"
+         Height          =   255
+         Left            =   120
+         TabIndex        =   88
          Top             =   240
-         Width           =   1215
+         Width           =   975
       End
-      Begin VB.Line Line6 
-         X1              =   3360
-         X2              =   3360
-         Y1              =   120
-         Y2              =   1080
-      End
-      Begin VB.Line Line5 
-         X1              =   480
-         X2              =   480
-         Y1              =   120
-         Y2              =   1080
-      End
-      Begin VB.Line Line4 
-         X1              =   480
-         X2              =   3360
-         Y1              =   1080
-         Y2              =   1080
-      End
-      Begin VB.Line Line3 
-         X1              =   480
-         X2              =   3360
-         Y1              =   120
-         Y2              =   120
-      End
-      Begin VB.Line Line2 
-         X1              =   480
-         X2              =   3360
-         Y1              =   600
-         Y2              =   600
-      End
-      Begin VB.Line Line1 
-         X1              =   1920
-         X2              =   1920
-         Y1              =   120
-         Y2              =   1080
-      End
-   End
-   Begin VB.PictureBox picAtt20 
-      Height          =   1815
-      Left            =   120
-      ScaleHeight     =   1755
-      ScaleWidth      =   4035
-      TabIndex        =   61
-      Top             =   600
-      Visible         =   0   'False
-      Width           =   4095
-      Begin VB.CheckBox chkAtt20Direction 
-         Caption         =   "Right"
-         Height          =   375
-         Index           =   3
-         Left            =   3240
-         TabIndex        =   74
-         Top             =   120
-         Width           =   735
-      End
-      Begin VB.CheckBox chkAtt20Direction 
-         Caption         =   "Left"
-         Height          =   375
-         Index           =   2
-         Left            =   2640
-         TabIndex        =   73
-         Top             =   120
-         Width           =   735
-      End
-      Begin VB.CheckBox chkAtt20Direction 
-         Caption         =   "Down"
-         Height          =   375
-         Index           =   1
-         Left            =   1920
-         TabIndex        =   72
-         Top             =   120
-         Width           =   735
-      End
-      Begin VB.CheckBox chkAtt20Direction 
-         Caption         =   "Up"
-         Height          =   375
-         Index           =   0
-         Left            =   1320
-         TabIndex        =   71
-         Top             =   120
-         Width           =   735
-      End
-      Begin VB.CheckBox chkAtt20Indoor 
-         Caption         =   "Indoor"
-         Height          =   375
-         Left            =   2640
-         TabIndex        =   70
-         Top             =   1320
-         Width           =   1095
-      End
-      Begin VB.CheckBox chkAtt20Outdoor 
-         Caption         =   "Outdoor"
-         Height          =   375
-         Left            =   1680
-         TabIndex        =   69
-         Top             =   1320
-         Width           =   1095
-      End
-      Begin VB.CheckBox chkAtt20Wall 
-         Caption         =   "Wall"
-         Height          =   375
-         Left            =   960
-         TabIndex        =   64
-         Top             =   1320
-         Width           =   735
-      End
-      Begin VB.HScrollBar sclAtt20X 
-         Height          =   255
-         Left            =   960
-         Max             =   32
-         TabIndex        =   63
-         Top             =   600
-         Width           =   2415
-      End
-      Begin VB.HScrollBar sclAtt20Y 
-         Height          =   255
-         Left            =   960
-         Max             =   32
-         TabIndex        =   62
-         Top             =   960
-         Width           =   2415
-      End
-      Begin VB.Label Label4 
-         Alignment       =   1  'Right Justify
-         Caption         =   "Split Direction:"
-         Height          =   255
-         Left            =   120
-         TabIndex        =   75
-         Top             =   240
-         Width           =   1095
-      End
-      Begin VB.Label cptAtt20Y 
-         Alignment       =   1  'Right Justify
-         Caption         =   "Y:"
-         Height          =   255
-         Left            =   120
-         TabIndex        =   68
-         Top             =   960
-         Width           =   615
-      End
-      Begin VB.Label cptAtt20X 
-         Alignment       =   1  'Right Justify
-         Caption         =   "X:"
-         Height          =   255
-         Left            =   120
-         TabIndex        =   67
-         Top             =   600
-         Width           =   615
-      End
-      Begin VB.Label lblAtt20X 
+      Begin VB.Label lblWalk 
          Alignment       =   2  'Center
-         Caption         =   "0"
+         Caption         =   "8"
          Height          =   255
-         Left            =   3480
-         TabIndex        =   66
-         Top             =   600
-         Width           =   375
-      End
-      Begin VB.Label lblAtt20Y 
-         Alignment       =   2  'Center
-         Caption         =   "0"
-         Height          =   255
-         Left            =   3480
-         TabIndex        =   65
-         Top             =   960
-         Width           =   375
-      End
-   End
-   Begin VB.PictureBox picAtt7 
-      Height          =   1455
-      Left            =   120
-      ScaleHeight     =   1395
-      ScaleWidth      =   4035
-      TabIndex        =   15
-      Top             =   600
-      Visible         =   0   'False
-      Width           =   4095
-      Begin VB.TextBox lblAtt7Val 
-         Alignment       =   2  'Center
-         Height          =   285
-         Left            =   3240
-         TabIndex        =   36
-         Text            =   "0"
-         Top             =   480
-         Width           =   735
-      End
-      Begin VB.TextBox lblAtt7Obj 
-         Alignment       =   2  'Center
-         Height          =   285
-         Left            =   3240
-         TabIndex        =   35
-         Text            =   "0"
-         Top             =   120
-         Width           =   735
-      End
-      Begin VB.HScrollBar sclAtt7Val 
-         Height          =   255
-         Left            =   720
-         Max             =   32000
-         TabIndex        =   17
-         Top             =   480
-         Width           =   2415
-      End
-      Begin VB.HScrollBar sclAtt7Obj 
-         Height          =   255
-         Left            =   720
-         Max             =   1000
-         Min             =   1
-         TabIndex        =   16
-         Top             =   120
-         Value           =   1
-         Width           =   2415
-      End
-      Begin VB.Label lblValue 
-         Caption         =   "Value"
-         Height          =   255
-         Left            =   120
-         TabIndex        =   38
-         Top             =   480
-         Width           =   615
-      End
-      Begin VB.Label lblObj 
-         Caption         =   "Object:"
-         Height          =   255
-         Left            =   120
-         TabIndex        =   37
-         Top             =   120
-         Width           =   615
-      End
-      Begin VB.Label lblObjName 
-         Caption         =   "Name:"
-         Height          =   255
-         Left            =   120
-         TabIndex        =   33
-         Top             =   840
-         Width           =   495
-      End
-      Begin VB.Label lblName 
-         Alignment       =   2  'Center
-         BeginProperty Font 
-            Name            =   "Times New Roman"
-            Size            =   11.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   375
-         Left            =   720
-         TabIndex        =   32
-         Top             =   840
-         Width           =   3015
-      End
-   End
-   Begin VB.PictureBox picAtt19 
-      Height          =   1815
-      Left            =   120
-      ScaleHeight     =   1755
-      ScaleWidth      =   4035
-      TabIndex        =   53
-      Top             =   600
-      Visible         =   0   'False
-      Width           =   4095
-      Begin VB.HScrollBar sclIntensity 
-         Height          =   255
-         Left            =   960
-         Max             =   255
-         TabIndex        =   58
-         Top             =   600
-         Width           =   2415
-      End
-      Begin VB.HScrollBar sclRadius 
-         Height          =   255
-         Left            =   960
-         Max             =   255
-         Min             =   1
-         TabIndex        =   57
-         Top             =   240
-         Value           =   100
-         Width           =   2415
-      End
-      Begin VB.CheckBox chkWall 
-         Caption         =   "Wall"
-         Height          =   375
-         Left            =   120
-         TabIndex        =   56
-         Top             =   960
-         Width           =   735
-      End
-      Begin VB.Label lblIntensity 
-         Alignment       =   2  'Center
-         Caption         =   "0"
-         Height          =   255
-         Left            =   3480
-         TabIndex        =   60
-         Top             =   600
-         Width           =   375
-      End
-      Begin VB.Label lblRadius 
-         Alignment       =   2  'Center
-         Caption         =   "100"
-         Height          =   255
-         Left            =   3480
-         TabIndex        =   59
+         Left            =   3600
+         TabIndex        =   87
          Top             =   240
          Width           =   375
       End
-      Begin VB.Label cptRadius 
-         Caption         =   "Radius"
+      Begin VB.Label lblRun 
+         Alignment       =   2  'Center
+         Caption         =   "16"
          Height          =   255
-         Left            =   120
-         TabIndex        =   55
-         Top             =   240
-         Width           =   735
-      End
-      Begin VB.Label cptIntensity 
-         Caption         =   "Intensity:"
-         Height          =   255
-         Left            =   120
-         TabIndex        =   54
+         Left            =   3600
+         TabIndex        =   86
          Top             =   600
-         Width           =   735
+         Width           =   375
       End
    End
    Begin VB.PictureBox picAtt17 
@@ -907,6 +581,394 @@ Begin VB.Form frmMapAtt
       Top             =   2520
       Width           =   1455
    End
+   Begin VB.PictureBox picAtt23 
+      Height          =   1815
+      Left            =   120
+      ScaleHeight     =   1755
+      ScaleWidth      =   4035
+      TabIndex        =   76
+      Top             =   600
+      Visible         =   0   'False
+      Width           =   4095
+      Begin VB.CheckBox chkAtt23 
+         Caption         =   "unchecked checked boxes become invisible"
+         Height          =   195
+         Index           =   5
+         Left            =   120
+         TabIndex        =   82
+         Top             =   1440
+         Width           =   3855
+      End
+      Begin VB.CheckBox chkAtt23 
+         Caption         =   "Background checked boxes become invisible"
+         Height          =   195
+         Index           =   4
+         Left            =   120
+         TabIndex        =   81
+         Top             =   1200
+         Width           =   3855
+      End
+      Begin VB.CheckBox chkAtt23 
+         Caption         =   "Background"
+         Height          =   255
+         Index           =   3
+         Left            =   2040
+         TabIndex        =   80
+         Top             =   720
+         Width           =   1215
+      End
+      Begin VB.CheckBox chkAtt23 
+         Caption         =   "Background"
+         Height          =   255
+         Index           =   2
+         Left            =   600
+         TabIndex        =   79
+         Top             =   720
+         Width           =   1215
+      End
+      Begin VB.CheckBox chkAtt23 
+         Caption         =   "Background"
+         Height          =   255
+         Index           =   1
+         Left            =   600
+         TabIndex        =   78
+         Top             =   240
+         Width           =   1215
+      End
+      Begin VB.CheckBox chkAtt23 
+         Caption         =   "Background"
+         Height          =   255
+         Index           =   0
+         Left            =   2040
+         TabIndex        =   77
+         Top             =   240
+         Width           =   1215
+      End
+      Begin VB.Line Line6 
+         X1              =   3360
+         X2              =   3360
+         Y1              =   120
+         Y2              =   1080
+      End
+      Begin VB.Line Line5 
+         X1              =   480
+         X2              =   480
+         Y1              =   120
+         Y2              =   1080
+      End
+      Begin VB.Line Line4 
+         X1              =   480
+         X2              =   3360
+         Y1              =   1080
+         Y2              =   1080
+      End
+      Begin VB.Line Line3 
+         X1              =   480
+         X2              =   3360
+         Y1              =   120
+         Y2              =   120
+      End
+      Begin VB.Line Line2 
+         X1              =   480
+         X2              =   3360
+         Y1              =   600
+         Y2              =   600
+      End
+      Begin VB.Line Line1 
+         X1              =   1920
+         X2              =   1920
+         Y1              =   120
+         Y2              =   1080
+      End
+   End
+   Begin VB.PictureBox picAtt20 
+      Height          =   1815
+      Left            =   120
+      ScaleHeight     =   1755
+      ScaleWidth      =   4035
+      TabIndex        =   61
+      Top             =   600
+      Visible         =   0   'False
+      Width           =   4095
+      Begin VB.CheckBox chkAtt20Direction 
+         Caption         =   "Right"
+         Height          =   375
+         Index           =   3
+         Left            =   3240
+         TabIndex        =   74
+         Top             =   120
+         Width           =   735
+      End
+      Begin VB.CheckBox chkAtt20Direction 
+         Caption         =   "Left"
+         Height          =   375
+         Index           =   2
+         Left            =   2640
+         TabIndex        =   73
+         Top             =   120
+         Width           =   735
+      End
+      Begin VB.CheckBox chkAtt20Direction 
+         Caption         =   "Down"
+         Height          =   375
+         Index           =   1
+         Left            =   1920
+         TabIndex        =   72
+         Top             =   120
+         Width           =   735
+      End
+      Begin VB.CheckBox chkAtt20Direction 
+         Caption         =   "Up"
+         Height          =   375
+         Index           =   0
+         Left            =   1320
+         TabIndex        =   71
+         Top             =   120
+         Width           =   735
+      End
+      Begin VB.CheckBox chkAtt20Indoor 
+         Caption         =   "Indoor"
+         Height          =   375
+         Left            =   2640
+         TabIndex        =   70
+         Top             =   1320
+         Width           =   1095
+      End
+      Begin VB.CheckBox chkAtt20Outdoor 
+         Caption         =   "Outdoor"
+         Height          =   375
+         Left            =   1680
+         TabIndex        =   69
+         Top             =   1320
+         Width           =   1095
+      End
+      Begin VB.CheckBox chkAtt20Wall 
+         Caption         =   "Wall"
+         Height          =   375
+         Left            =   960
+         TabIndex        =   64
+         Top             =   1320
+         Width           =   735
+      End
+      Begin VB.HScrollBar sclAtt20X 
+         Height          =   255
+         Left            =   960
+         Max             =   32
+         TabIndex        =   63
+         Top             =   600
+         Width           =   2415
+      End
+      Begin VB.HScrollBar sclAtt20Y 
+         Height          =   255
+         Left            =   960
+         Max             =   32
+         TabIndex        =   62
+         Top             =   960
+         Width           =   2415
+      End
+      Begin VB.Label Label4 
+         Alignment       =   1  'Right Justify
+         Caption         =   "Split Direction:"
+         Height          =   255
+         Left            =   120
+         TabIndex        =   75
+         Top             =   240
+         Width           =   1095
+      End
+      Begin VB.Label cptAtt20X 
+         Alignment       =   1  'Right Justify
+         Caption         =   "X:"
+         Height          =   255
+         Left            =   120
+         TabIndex        =   67
+         Top             =   600
+         Width           =   615
+      End
+      Begin VB.Label lblAtt20X 
+         Alignment       =   2  'Center
+         Caption         =   "0"
+         Height          =   255
+         Left            =   3480
+         TabIndex        =   66
+         Top             =   600
+         Width           =   375
+      End
+      Begin VB.Label lblAtt20Y 
+         Alignment       =   2  'Center
+         Caption         =   "0"
+         Height          =   255
+         Left            =   3480
+         TabIndex        =   65
+         Top             =   960
+         Width           =   375
+      End
+      Begin VB.Label cptAtt20Y 
+         Alignment       =   1  'Right Justify
+         Caption         =   "Y:"
+         Height          =   255
+         Left            =   120
+         TabIndex        =   68
+         Top             =   960
+         Width           =   615
+      End
+   End
+   Begin VB.PictureBox picAtt7 
+      Height          =   1455
+      Left            =   120
+      ScaleHeight     =   1395
+      ScaleWidth      =   4035
+      TabIndex        =   15
+      Top             =   600
+      Visible         =   0   'False
+      Width           =   4095
+      Begin VB.TextBox lblAtt7Val 
+         Alignment       =   2  'Center
+         Height          =   285
+         Left            =   3240
+         TabIndex        =   36
+         Text            =   "0"
+         Top             =   480
+         Width           =   735
+      End
+      Begin VB.TextBox lblAtt7Obj 
+         Alignment       =   2  'Center
+         Height          =   285
+         Left            =   3240
+         TabIndex        =   35
+         Text            =   "0"
+         Top             =   120
+         Width           =   735
+      End
+      Begin VB.HScrollBar sclAtt7Val 
+         Height          =   255
+         Left            =   720
+         Max             =   32000
+         TabIndex        =   17
+         Top             =   480
+         Width           =   2415
+      End
+      Begin VB.HScrollBar sclAtt7Obj 
+         Height          =   255
+         Left            =   720
+         Max             =   1000
+         Min             =   1
+         TabIndex        =   16
+         Top             =   120
+         Value           =   1
+         Width           =   2415
+      End
+      Begin VB.Label lblValue 
+         Caption         =   "Value"
+         Height          =   255
+         Left            =   120
+         TabIndex        =   38
+         Top             =   480
+         Width           =   615
+      End
+      Begin VB.Label lblObj 
+         Caption         =   "Object:"
+         Height          =   255
+         Left            =   120
+         TabIndex        =   37
+         Top             =   120
+         Width           =   615
+      End
+      Begin VB.Label lblObjName 
+         Caption         =   "Name:"
+         Height          =   255
+         Left            =   120
+         TabIndex        =   33
+         Top             =   840
+         Width           =   495
+      End
+      Begin VB.Label lblName 
+         Alignment       =   2  'Center
+         BeginProperty Font 
+            Name            =   "Times New Roman"
+            Size            =   11.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   375
+         Left            =   720
+         TabIndex        =   32
+         Top             =   840
+         Width           =   3015
+      End
+   End
+   Begin VB.PictureBox picAtt19 
+      Height          =   1815
+      Left            =   120
+      ScaleHeight     =   1755
+      ScaleWidth      =   4035
+      TabIndex        =   53
+      Top             =   600
+      Visible         =   0   'False
+      Width           =   4095
+      Begin VB.HScrollBar sclIntensity 
+         Height          =   255
+         Left            =   960
+         Max             =   255
+         TabIndex        =   58
+         Top             =   600
+         Width           =   2415
+      End
+      Begin VB.HScrollBar sclRadius 
+         Height          =   255
+         Left            =   960
+         Max             =   255
+         Min             =   1
+         TabIndex        =   57
+         Top             =   240
+         Value           =   100
+         Width           =   2415
+      End
+      Begin VB.CheckBox chkWall 
+         Caption         =   "Wall"
+         Height          =   375
+         Left            =   120
+         TabIndex        =   56
+         Top             =   960
+         Width           =   735
+      End
+      Begin VB.Label lblIntensity 
+         Alignment       =   2  'Center
+         Caption         =   "0"
+         Height          =   255
+         Left            =   3480
+         TabIndex        =   60
+         Top             =   600
+         Width           =   375
+      End
+      Begin VB.Label lblRadius 
+         Alignment       =   2  'Center
+         Caption         =   "100"
+         Height          =   255
+         Left            =   3480
+         TabIndex        =   59
+         Top             =   240
+         Width           =   375
+      End
+      Begin VB.Label cptRadius 
+         Caption         =   "Radius"
+         Height          =   255
+         Left            =   120
+         TabIndex        =   55
+         Top             =   240
+         Width           =   735
+      End
+      Begin VB.Label cptIntensity 
+         Caption         =   "Intensity:"
+         Height          =   255
+         Left            =   120
+         TabIndex        =   54
+         Top             =   600
+         Width           =   735
+      End
+   End
    Begin VB.Label lblAtt 
       Alignment       =   2  'Center
       BeginProperty Font 
@@ -1040,6 +1102,11 @@ Private Sub btnOk_Click()
         CurAttData(1) = 0
         CurAttData(2) = 0
         CurAttData(3) = 0
+    Case 24 'speed tile
+        CurAttData(0) = sclWalk
+        CurAttData(1) = sclRun
+        CurAttData(2) = 0
+        CurAttData(3) = 0
     End Select
     Unload Me
 End Sub
@@ -1120,6 +1187,7 @@ Private Sub Form_Load()
             If ExamineBit(CurAttData(3), 2) = True Then chkAtt20Indoor.value = 1
         End If
     Case 23 'half tile
+        lblAtt = "23 - Half Tile"
         picAtt23.Visible = True
         If (ExamineBit(CurAttData(0), 0)) Then chkAtt23(0).value = 1
         If (ExamineBit(CurAttData(0), 1)) Then chkAtt23(1).value = 1
@@ -1127,6 +1195,12 @@ Private Sub Form_Load()
         If (ExamineBit(CurAttData(0), 3)) Then chkAtt23(3).value = 1
         If (ExamineBit(CurAttData(0), 4)) Then chkAtt23(4).value = 1
         If (ExamineBit(CurAttData(0), 5)) Then chkAtt23(5).value = 1
+    Case 24 'Speed Mod
+        lblAtt = "24 - Speed Mod"
+        picatt24.Visible = True
+        sclWalk = CurAttData(0)
+        sclRun = CurAttData(1)
+        
     End Select
 End Sub
 
@@ -1247,4 +1321,12 @@ End Sub
 
 Private Sub sclRadius_Scroll()
     sclRadius_Change
+End Sub
+
+Private Sub sclRun_Change()
+    lblRun = Str(sclRun)
+End Sub
+
+Private Sub sclWalk_Change()
+    lblWalk = Str(sclWalk)
 End Sub
