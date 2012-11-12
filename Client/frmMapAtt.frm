@@ -14,6 +14,57 @@ Begin VB.Form frmMapAtt
    ScaleHeight     =   3090
    ScaleWidth      =   4860
    StartUpPosition =   2  'CenterScreen
+   Begin VB.PictureBox picAtt25 
+      Height          =   1815
+      Left            =   120
+      ScaleHeight     =   1755
+      ScaleWidth      =   4035
+      TabIndex        =   90
+      Top             =   600
+      Visible         =   0   'False
+      Width           =   4095
+      Begin VB.CheckBox chkAffectMonsters 
+         Caption         =   "Affect Monsters"
+         Height          =   195
+         Left            =   240
+         TabIndex        =   95
+         Top             =   960
+         Width           =   1575
+      End
+      Begin VB.CheckBox chkAffectPlayers 
+         Caption         =   "Affect Players"
+         Height          =   195
+         Left            =   240
+         TabIndex        =   94
+         Top             =   720
+         Width           =   1575
+      End
+      Begin VB.HScrollBar sclCutOff 
+         Height          =   255
+         Left            =   1200
+         Max             =   32
+         TabIndex        =   91
+         Top             =   240
+         Width           =   2415
+      End
+      Begin VB.Label lblCutoff 
+         Alignment       =   2  'Center
+         Caption         =   "0"
+         Height          =   255
+         Left            =   3600
+         TabIndex        =   93
+         Top             =   240
+         Width           =   375
+      End
+      Begin VB.Label Label8 
+         Caption         =   "Cut Off"
+         Height          =   255
+         Left            =   120
+         TabIndex        =   92
+         Top             =   240
+         Width           =   975
+      End
+   End
    Begin VB.PictureBox picatt24 
       Height          =   1815
       Left            =   120
@@ -1107,6 +1158,11 @@ Private Sub btnOk_Click()
         CurAttData(1) = sclRun
         CurAttData(2) = 0
         CurAttData(3) = 0
+    Case 25 'sprite half tile
+        CurAttData(0) = sclCutOff
+        CurAttData(1) = chkAffectPlayers + chkAffectMonsters * 2
+        CurAttData(2) = 0
+        CurAttData(3) = 0
     End Select
     Unload Me
 End Sub
@@ -1200,7 +1256,12 @@ Private Sub Form_Load()
         picatt24.Visible = True
         sclWalk = CurAttData(0)
         sclRun = CurAttData(1)
-        
+    Case 25 'sprite half tile
+        lblAtt = "25 - Sprite Half Tile"
+        picAtt25.Visible = True
+        sclCutOff = CurAttData(0)
+        If (ExamineBit(CurAttData(1), 0)) Then chkAffectPlayers.value = 1
+        If (ExamineBit(CurAttData(1), 1)) Then chkAffectMonsters.value = 1
     End Select
 End Sub
 
@@ -1305,6 +1366,10 @@ End Sub
 
 Private Sub sclAtt9Damage_Scroll()
     sclAtt9Damage_Change
+End Sub
+
+Private Sub sclCutOff_Change()
+    lblCutoff = Str(sclCutOff)
 End Sub
 
 Private Sub sclIntensity_Change()

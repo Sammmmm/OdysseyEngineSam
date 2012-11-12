@@ -47,4 +47,4 @@ modConstants = -51, 194, 1015, 916,
 modFMod = 66, 87, 576, 495, C
 frmEmail = 250, 250, 1228, 967, C, 66, 87, 630, 509, C
 modSecret = 100, 107, 1094, 839, 
-modUpdate = 50, 50, 678, 513, 
+modUpdate = 50, 50, 678, 513, Z
