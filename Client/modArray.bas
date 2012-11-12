@@ -74,6 +74,8 @@ Type PlayerData
     IsDead As Boolean
     HP As Byte
     MaxHP As Byte
+    WalkStart As Long
+    
 End Type
 
 Type MacroData

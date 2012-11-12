@@ -276,6 +276,7 @@ Sub ProcessString(PacketID As Long, St As String)
                     End If
                     .D = Asc(Mid$(St, 4, 1))
                     .WalkStep = Asc(Mid$(St, 5, 1))
+                    .WalkStart = timeGetTime
                     .IsDead = False
                 End With
             End If
