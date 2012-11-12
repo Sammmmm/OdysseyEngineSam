@@ -960,6 +960,7 @@ Sub ProcessString(PacketID As Long, St As String)
             A = Asc(Mid$(St, 1, 1))
             If A <= MaxMonsters Then
                 With Map.Monster(A)
+                    .WalkStart = timeGetTime
                     If CLng(.X) * 32 <> .XO Then
                         .X = Asc(Mid$(St, 2, 1))
                         .XO = .X * 32

@@ -141,6 +141,7 @@ Type MapMonsterData
     A As Byte
     W As Byte
     HPBar As Boolean
+    WalkStart As Long
 End Type
 
 Type MapObjectData

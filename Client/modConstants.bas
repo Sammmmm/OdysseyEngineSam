@@ -6,6 +6,9 @@ Public Const TargetFrameRate = 40
 Public Const TargetFrameTicks = 1000 / TargetFrameRate
 Public Const TargetMoveTicks = 3200 '(must be adjusted if default cwalksteps are adjusted)
 
+Public Const MonsterWalkSpeed = 8
+Public Const MonsterRunSpeed = 16
+
 'Editing Mode Constants
 Public ListEditMode As Byte
 Public Const modeObjects = 1

@@ -103,34 +103,46 @@ Sub UpdateGame()
                 C = Monster(.Monster).Sprite
                 If C > 0 And C <= MaxSprite Then
                     If .XO < .X * 32 Then
+                        D = .XO \ 16
                         If ExamineBit(Monster(.Monster).flags, 2) = False Then 'Not runner
-                            .XO = .XO + 2
+                            .XO = (.X - 1) * 32 + ((timeGetTime - .WalkStart) / (TargetMoveTicks / MonsterWalkSpeed)) * 32
                         Else
-                            .XO = .XO + 4
+                            .XO = (.X - 1) * 32 + ((timeGetTime - .WalkStart) / (TargetMoveTicks / MonsterRunSpeed)) * 32
                         End If
-                        If Int(.XO / 16) * 16 = .XO Then .W = 1 - .W
+                        If (.XO >= .X * 32) Then .XO = .X * 32
+                        
+                        If D <> .XO \ 16 Then .W = 1 - .W
                     ElseIf .XO > .X * 32 Then
+                        D = .XO \ 16
                         If ExamineBit(Monster(.Monster).flags, 2) = False Then 'Not runner
-                            .XO = .XO - 2
+                            .XO = (.X + 1) * 32 - ((timeGetTime - .WalkStart) / (TargetMoveTicks / MonsterWalkSpeed)) * 32
                         Else
-                            .XO = .XO - 4
+                            .XO = (.X + 1) * 32 - ((timeGetTime - .WalkStart) / (TargetMoveTicks / MonsterRunSpeed)) * 32
                         End If
-                        If Int(.XO / 16) * 16 = .XO Then .W = 1 - .W
+                        If (.XO <= .X * 32) Then .XO = .X * 32
+                        
+                        If D <> .XO \ 16 Then .W = 1 - .W
                     End If
                     If .YO < .Y * 32 Then
+                        D = .YO \ 16
                         If ExamineBit(Monster(.Monster).flags, 2) = False Then 'Not runner
-                            .YO = .YO + 2
+                            .YO = (.Y - 1) * 32 + ((timeGetTime - .WalkStart) / (TargetMoveTicks / MonsterWalkSpeed)) * 32
                         Else
-                            .YO = .YO + 4
+                            .YO = (.Y - 1) * 32 + ((timeGetTime - .WalkStart) / (TargetMoveTicks / MonsterRunSpeed)) * 32
                         End If
-                        If Int(.YO / 16) * 16 = .YO Then .W = 1 - .W
+                        If (.YO >= .Y * 32) Then .YO = .Y * 32
+                        
+                        If D <> .YO \ 16 Then .W = 1 - .W
                     ElseIf .YO > .Y * 32 Then
+                        D = .YO \ 16
                         If ExamineBit(Monster(.Monster).flags, 2) = False Then 'Not runner
-                            .YO = .YO - 2
+                            .YO = (.Y + 1) * 32 - ((timeGetTime - .WalkStart) / (TargetMoveTicks / MonsterWalkSpeed)) * 32
                         Else
-                            .YO = .YO - 4
+                            .YO = (.Y + 1) * 32 - ((timeGetTime - .WalkStart) / (TargetMoveTicks / MonsterRunSpeed)) * 32
                         End If
-                        If Int(.YO / 16) * 16 = .YO Then .W = 1 - .W
+                        If (.YO <= .Y * 32) Then .YO = .Y * 32
+                        
+                        If D <> .YO \ 16 Then .W = 1 - .W
                     End If
                 End If
             End If
