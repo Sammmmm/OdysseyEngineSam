@@ -297,7 +297,7 @@ Sub UpdateGame()
                                 .TargetY = .Y
                             End Select
                             
-                            If NoDirectionalWalls(CByte(.X / 32), CByte(.Y / 32), .Direction) = False Then
+                            If NoDirectionalWalls(CByte(.X / 32), CByte(.Y / 32), .Direction, True) = False Then
                                 .TargetX = .X
                                 .TargetY = .Y
                             End If

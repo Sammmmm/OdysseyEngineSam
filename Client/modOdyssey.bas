@@ -1067,21 +1067,21 @@ Sub CheckKeys()
         End If
         If keyUp = True Then
             If CDir = 0 Then
-                If CY > 0 Then
-                    If IsVacant(CX, CY - 1) Then
-                        If NoDirectionalWalls(CX, CY, 0) Then
+                If NoDirectionalWalls(CX, CY, 0) Then
+                    If CY > 0 Then
+                        If IsVacant(CX, CY - 1) Then
                             CY = CY - 1
                             CWalkStart = timeGetTime
                             MoveToTile
                         End If
-                    End If
-                Else
-                    If Map.ExitUp > 0 Then
-                        If Tick > SwitchMapTimer Or Character.Access > 0 Then
-                            SwitchMapTimer = Tick + GetMapSwitchTime
-                            SendSocket Chr$(13) + Chr$(0)
-                            Freeze = True
-                            NextTransition = 1
+                    Else
+                        If Map.ExitUp > 0 Then
+                            If Tick > SwitchMapTimer Or Character.Access > 0 Then
+                                SwitchMapTimer = Tick + GetMapSwitchTime
+                                SendSocket Chr$(13) + Chr$(0)
+                                Freeze = True
+                                NextTransition = 1
+                            End If
                         End If
                     End If
                 End If
@@ -1091,21 +1091,21 @@ Sub CheckKeys()
             End If
         ElseIf keyDown = True Then
             If CDir = 1 Then
-                If CY < 11 Then
-                    If IsVacant(CX, CY + 1) Then
-                        If NoDirectionalWalls(CX, CY, 1) Then
+                If NoDirectionalWalls(CX, CY, 1) Then
+                    If CY < 11 Then
+                        If IsVacant(CX, CY + 1) Then
                             CY = CY + 1
                             CWalkStart = timeGetTime
                             MoveToTile
                         End If
-                    End If
-                Else
-                    If Map.ExitDown > 0 Then
-                        If Tick > SwitchMapTimer Or Character.Access > 0 Then
-                            SwitchMapTimer = Tick + GetMapSwitchTime
-                            SendSocket Chr$(13) + Chr$(1)
-                            Freeze = True
-                            NextTransition = 2
+                    Else
+                        If Map.ExitDown > 0 Then
+                            If Tick > SwitchMapTimer Or Character.Access > 0 Then
+                                SwitchMapTimer = Tick + GetMapSwitchTime
+                                SendSocket Chr$(13) + Chr$(1)
+                                Freeze = True
+                                NextTransition = 2
+                            End If
                         End If
                     End If
                 End If
@@ -1115,21 +1115,21 @@ Sub CheckKeys()
             End If
         ElseIf keyLeft = True Then
             If CDir = 2 Then
-                If CX > 0 Then
-                    If IsVacant(CX - 1, CY) Then
-                        If NoDirectionalWalls(CX, CY, 2) Then
+                If NoDirectionalWalls(CX, CY, 2) Then
+                    If CX > 0 Then
+                        If IsVacant(CX - 1, CY) Then
                             CX = CX - 1
                             CWalkStart = timeGetTime
                             MoveToTile
                         End If
-                    End If
-                Else
-                    If Map.ExitLeft > 0 Then
-                        If Tick > SwitchMapTimer Or Character.Access > 0 Then
-                            SwitchMapTimer = Tick + GetMapSwitchTime
-                            SendSocket Chr$(13) + Chr$(2)
-                            Freeze = True
-                            NextTransition = 3
+                    Else
+                        If Map.ExitLeft > 0 Then
+                            If Tick > SwitchMapTimer Or Character.Access > 0 Then
+                                SwitchMapTimer = Tick + GetMapSwitchTime
+                                SendSocket Chr$(13) + Chr$(2)
+                                Freeze = True
+                                NextTransition = 3
+                            End If
                         End If
                     End If
                 End If
@@ -1139,21 +1139,21 @@ Sub CheckKeys()
             End If
         ElseIf keyRight = True Then
             If CDir = 3 Then
-                If CX < 11 Then
-                    If IsVacant(CX + 1, CY) Then
-                        If NoDirectionalWalls(CX, CY, 3) Then
+                If NoDirectionalWalls(CX, CY, 3) Then
+                    If CX < 11 Then
+                        If IsVacant(CX + 1, CY) Then
                             CX = CX + 1
                             CWalkStart = timeGetTime
                             MoveToTile
                         End If
-                    End If
-                Else
-                    If Map.ExitRight > 0 Then
-                        If Tick > SwitchMapTimer Or Character.Access > 0 Then
-                            SwitchMapTimer = Tick + GetMapSwitchTime
-                            SendSocket Chr$(13) + Chr$(3)
-                            Freeze = True
-                            NextTransition = 4
+                    Else
+                        If Map.ExitRight > 0 Then
+                            If Tick > SwitchMapTimer Or Character.Access > 0 Then
+                                SwitchMapTimer = Tick + GetMapSwitchTime
+                                SendSocket Chr$(13) + Chr$(3)
+                                Freeze = True
+                                NextTransition = 4
+                            End If
                         End If
                     End If
                 End If
@@ -2534,78 +2534,70 @@ Function StripString(St As String) As String
     StripString = Stripped
 End Function
 
-Function NoDirectionalWalls(X As Byte, Y As Byte, Direction As Byte) As Boolean
+Function NoDirectionalWalls(X As Byte, Y As Byte, Direction As Byte, Optional IsProjectile As Boolean = False) As Boolean
     NoDirectionalWalls = True
     If Character.Access > 0 And keyAlt = False Then Exit Function
     Select Case Direction
     Case 0    'Up
-        If Y >= 0 Then
             If Y > 0 Then
                 If Map.Tile(X, Y - 1).Att = 17 Then
-                    If ExamineBit(Map.Tile(X, Y - 1).AttData(0), 3) Then
+                    If ExamineBit(Map.Tile(X, Y - 1).AttData(0), 3) And (ExamineBit(Map.Tile(X, Y - 1).AttData(3), 0) = False Or IsProjectile = False) Then
                         NoDirectionalWalls = False
                         Exit Function
                     End If
                 End If
             End If
             If Map.Tile(X, Y).Att = 17 Then
-                If ExamineBit(Map.Tile(X, Y).AttData(0), 1) Then
+                If ExamineBit(Map.Tile(X, Y).AttData(0), 1) And (ExamineBit(Map.Tile(X, Y).AttData(3), 1) = False Or IsProjectile = False) Then
                     NoDirectionalWalls = False
                     Exit Function
                 End If
             End If
-        End If
     Case 1    'Down
-        If Y < 12 Then
             If Y < 11 Then
                 If Map.Tile(X, Y + 1).Att = 17 Then
-                    If ExamineBit(Map.Tile(X, Y + 1).AttData(0), 0) Then
+                    If ExamineBit(Map.Tile(X, Y + 1).AttData(0), 0) And (ExamineBit(Map.Tile(X, Y + 1).AttData(3), 0) = False Or IsProjectile = False) Then
                         NoDirectionalWalls = False
                         Exit Function
                     End If
                 End If
             End If
             If Map.Tile(X, Y).Att = 17 Then
-                If ExamineBit(Map.Tile(X, Y).AttData(0), 2) Then
+                If ExamineBit(Map.Tile(X, Y).AttData(0), 2) And (ExamineBit(Map.Tile(X, Y).AttData(3), 1) = False Or IsProjectile = False) Then
                     NoDirectionalWalls = False
                     Exit Function
                 End If
             End If
-        End If
     Case 2    'Left
-        If X >= 0 Then
             If X > 0 Then
                 If Map.Tile(X - 1, Y).Att = 17 Then
-                    If ExamineBit(Map.Tile(X - 1, Y).AttData(0), 6) Then
+                    If ExamineBit(Map.Tile(X - 1, Y).AttData(0), 6) And (ExamineBit(Map.Tile(X - 1, Y).AttData(3), 0) = False Or IsProjectile = False) Then
                         NoDirectionalWalls = False
                         Exit Function
                     End If
                 End If
             End If
             If Map.Tile(X, Y).Att = 17 Then
-                If ExamineBit(Map.Tile(X, Y).AttData(0), 4) Then
+                If ExamineBit(Map.Tile(X, Y).AttData(0), 4) And (ExamineBit(Map.Tile(X, Y).AttData(3), 1) = False Or IsProjectile = False) Then
                     NoDirectionalWalls = False
                     Exit Function
                 End If
             End If
-        End If
     Case 3    'Right
-        If X < 12 Then
             If X < 11 Then
                 If Map.Tile(X + 1, Y).Att = 17 Then
-                    If ExamineBit(Map.Tile(X + 1, Y).AttData(0), 5) Then
+                    If ExamineBit(Map.Tile(X + 1, Y).AttData(0), 5) And (ExamineBit(Map.Tile(X + 1, Y).AttData(3), 0) = False Or IsProjectile = False) Then
                         NoDirectionalWalls = False
                         Exit Function
                     End If
                 End If
             End If
             If Map.Tile(X, Y).Att = 17 Then
-                If ExamineBit(Map.Tile(X, Y).AttData(0), 7) Then
+                If ExamineBit(Map.Tile(X, Y).AttData(0), 7) And (ExamineBit(Map.Tile(X, Y).AttData(3), 1) = False Or IsProjectile = False) Then
                     NoDirectionalWalls = False
                     Exit Function
                 End If
             End If
-        End If
     End Select
 End Function
 

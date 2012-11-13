@@ -2,7 +2,7 @@ VERSION 5.00
 Begin VB.Form frmMapAtt 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "The Odyssey Online Classic [Map Attribute]"
-   ClientHeight    =   3090
+   ClientHeight    =   3345
    ClientLeft      =   150
    ClientTop       =   225
    ClientWidth     =   4860
@@ -11,241 +11,70 @@ Begin VB.Form frmMapAtt
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   3090
+   ScaleHeight     =   3345
    ScaleWidth      =   4860
    StartUpPosition =   2  'CenterScreen
-   Begin VB.PictureBox picAtt26 
-      Height          =   1815
-      Left            =   120
-      ScaleHeight     =   1755
-      ScaleWidth      =   4035
-      TabIndex        =   96
-      Top             =   600
-      Visible         =   0   'False
-      Width           =   4095
-      Begin VB.CheckBox chkShiftFG 
-         Caption         =   "FG"
-         Height          =   195
-         Left            =   1920
-         TabIndex        =   108
-         Top             =   1200
-         Width           =   1095
-      End
-      Begin VB.CheckBox chkShiftFG2 
-         Caption         =   "FG2"
-         Height          =   195
-         Left            =   1920
-         TabIndex        =   107
-         Top             =   1440
-         Width           =   1095
-      End
-      Begin VB.CheckBox chkShiftBG 
-         Caption         =   "BG"
-         Height          =   195
-         Left            =   1200
-         TabIndex        =   106
-         Top             =   1200
-         Width           =   1095
-      End
-      Begin VB.CheckBox chkShiftBG2 
-         Caption         =   "BG2"
-         Height          =   195
-         Left            =   1200
-         TabIndex        =   105
-         Top             =   1440
-         Width           =   1095
-      End
-      Begin VB.HScrollBar sclShiftY 
-         Height          =   255
-         Left            =   360
-         Max             =   256
-         TabIndex        =   102
-         Top             =   600
-         Value           =   128
-         Width           =   3255
-      End
-      Begin VB.HScrollBar sclShiftX 
-         Height          =   255
-         Left            =   360
-         Max             =   256
-         TabIndex        =   99
-         Top             =   240
-         Value           =   128
-         Width           =   3255
-      End
-      Begin VB.CheckBox chkShiftGround 
-         Caption         =   "Ground"
-         Height          =   195
-         Left            =   120
-         TabIndex        =   98
-         Top             =   1200
-         Width           =   1095
-      End
-      Begin VB.CheckBox chkShiftGround2 
-         Caption         =   "Ground 2"
-         Height          =   195
-         Left            =   120
-         TabIndex        =   97
-         Top             =   1440
-         Width           =   1095
-      End
-      Begin VB.Label Label16 
-         Caption         =   "Y"
-         Height          =   255
-         Left            =   120
-         TabIndex        =   104
-         Top             =   600
-         Width           =   975
-      End
-      Begin VB.Label lblShiftY 
-         Alignment       =   2  'Center
-         Caption         =   "0"
-         Height          =   255
-         Left            =   3600
-         TabIndex        =   103
-         Top             =   600
-         Width           =   375
-      End
-      Begin VB.Label Label13 
-         Caption         =   "X"
-         Height          =   255
-         Left            =   120
-         TabIndex        =   101
-         Top             =   240
-         Width           =   975
-      End
-      Begin VB.Label lblShiftX 
-         Alignment       =   2  'Center
-         Caption         =   "0"
-         Height          =   255
-         Left            =   3600
-         TabIndex        =   100
-         Top             =   240
-         Width           =   375
-      End
-   End
-   Begin VB.PictureBox picAtt25 
-      Height          =   1815
-      Left            =   120
-      ScaleHeight     =   1755
-      ScaleWidth      =   4035
-      TabIndex        =   90
-      Top             =   600
-      Visible         =   0   'False
-      Width           =   4095
-      Begin VB.CheckBox chkAffectMonsters 
-         Caption         =   "Affect Monsters"
-         Height          =   195
-         Left            =   240
-         TabIndex        =   95
-         Top             =   960
-         Width           =   1575
-      End
-      Begin VB.CheckBox chkAffectPlayers 
-         Caption         =   "Affect Players"
-         Height          =   195
-         Left            =   240
-         TabIndex        =   94
-         Top             =   720
-         Width           =   1575
-      End
-      Begin VB.HScrollBar sclCutOff 
-         Height          =   255
-         Left            =   1200
-         Max             =   32
-         TabIndex        =   91
-         Top             =   240
-         Width           =   2415
-      End
-      Begin VB.Label lblCutoff 
-         Alignment       =   2  'Center
-         Caption         =   "0"
-         Height          =   255
-         Left            =   3600
-         TabIndex        =   93
-         Top             =   240
-         Width           =   375
-      End
-      Begin VB.Label Label8 
-         Caption         =   "Cut Off"
-         Height          =   255
-         Left            =   120
-         TabIndex        =   92
-         Top             =   240
-         Width           =   975
-      End
-   End
-   Begin VB.PictureBox picatt24 
-      Height          =   1815
-      Left            =   120
-      ScaleHeight     =   1755
-      ScaleWidth      =   4035
-      TabIndex        =   83
-      Top             =   600
-      Visible         =   0   'False
-      Width           =   4095
-      Begin VB.HScrollBar sclWalk 
-         Height          =   255
-         Left            =   1200
-         Max             =   31
-         TabIndex        =   85
-         Top             =   240
-         Value           =   8
-         Width           =   2415
-      End
-      Begin VB.HScrollBar sclRun 
-         Height          =   255
-         Left            =   1200
-         Max             =   31
-         TabIndex        =   84
-         Top             =   600
-         Value           =   16
-         Width           =   2415
-      End
-      Begin VB.Label Label11 
-         Caption         =   "Run Speed"
-         Height          =   255
-         Left            =   120
-         TabIndex        =   89
-         Top             =   600
-         Width           =   855
-      End
-      Begin VB.Label Label9 
-         Caption         =   "Walk Speed"
-         Height          =   255
-         Left            =   120
-         TabIndex        =   88
-         Top             =   240
-         Width           =   975
-      End
-      Begin VB.Label lblWalk 
-         Alignment       =   2  'Center
-         Caption         =   "8"
-         Height          =   255
-         Left            =   3600
-         TabIndex        =   87
-         Top             =   240
-         Width           =   375
-      End
-      Begin VB.Label lblRun 
-         Alignment       =   2  'Center
-         Caption         =   "16"
-         Height          =   255
-         Left            =   3600
-         TabIndex        =   86
-         Top             =   600
-         Width           =   375
-      End
-   End
    Begin VB.PictureBox picAtt17 
-      Height          =   1815
+      Height          =   2055
       Left            =   120
-      ScaleHeight     =   1755
+      ScaleHeight     =   1995
       ScaleWidth      =   4035
       TabIndex        =   41
       Top             =   600
       Visible         =   0   'False
       Width           =   4095
+      Begin VB.CheckBox chkAllowProjectilesTo 
+         Caption         =   "Allow Projectiles To"
+         Height          =   255
+         Left            =   120
+         TabIndex        =   110
+         Top             =   1680
+         Width           =   2055
+      End
+      Begin VB.CheckBox chkDirections 
+         Caption         =   "To Right"
+         Height          =   255
+         Index           =   7
+         Left            =   2880
+         TabIndex        =   46
+         Top             =   720
+         Width           =   1695
+      End
+      Begin VB.CheckBox chkDirections 
+         Caption         =   "From Right"
+         Height          =   255
+         Index           =   6
+         Left            =   2880
+         TabIndex        =   45
+         Top             =   480
+         Width           =   1695
+      End
+      Begin VB.CheckBox chkDirections 
+         Caption         =   "From Below"
+         Height          =   255
+         Index           =   3
+         Left            =   1440
+         TabIndex        =   49
+         Top             =   1080
+         Width           =   1695
+      End
+      Begin VB.CheckBox chkDirections 
+         Caption         =   "To Below"
+         Height          =   255
+         Index           =   2
+         Left            =   1440
+         TabIndex        =   48
+         Top             =   840
+         Width           =   1695
+      End
+      Begin VB.CheckBox chkAllowProjectilesFrom 
+         Caption         =   "Allow Projectiles From"
+         Height          =   255
+         Left            =   120
+         TabIndex        =   109
+         Top             =   1440
+         Width           =   2055
+      End
       Begin VB.CheckBox chkNoMonster 
          Caption         =   "No Monster"
          Height          =   255
@@ -272,49 +101,13 @@ Begin VB.Form frmMapAtt
          Top             =   480
          Width           =   975
       End
-      Begin VB.CheckBox chkDirections 
-         Caption         =   "From Below"
-         Height          =   255
-         Index           =   3
-         Left            =   1440
-         TabIndex        =   49
-         Top             =   1200
-         Width           =   1695
-      End
-      Begin VB.CheckBox chkDirections 
-         Caption         =   "To Below"
-         Height          =   255
-         Index           =   2
-         Left            =   1440
-         TabIndex        =   48
-         Top             =   960
-         Width           =   1695
-      End
       Begin VB.CheckBox chkKeep 
          Caption         =   "Keep"
          Height          =   255
-         Left            =   120
+         Left            =   2880
          TabIndex        =   47
-         Top             =   1440
+         Top             =   1680
          Width           =   1215
-      End
-      Begin VB.CheckBox chkDirections 
-         Caption         =   "To Right"
-         Height          =   255
-         Index           =   7
-         Left            =   2880
-         TabIndex        =   46
-         Top             =   720
-         Width           =   1695
-      End
-      Begin VB.CheckBox chkDirections 
-         Caption         =   "From Right"
-         Height          =   255
-         Index           =   6
-         Left            =   2880
-         TabIndex        =   45
-         Top             =   480
-         Width           =   1695
       End
       Begin VB.CheckBox chkDirections 
          Caption         =   "To Above"
@@ -729,17 +522,17 @@ Begin VB.Form frmMapAtt
       Cancel          =   -1  'True
       Caption         =   "Cancel"
       Height          =   495
-      Left            =   1680
+      Left            =   1800
       TabIndex        =   1
-      Top             =   2520
+      Top             =   2760
       Width           =   1455
    End
    Begin VB.CommandButton btnOk 
       Caption         =   "Ok"
       Height          =   495
-      Left            =   3240
+      Left            =   3360
       TabIndex        =   0
-      Top             =   2520
+      Top             =   2760
       Width           =   1455
    End
    Begin VB.PictureBox picAtt23 
@@ -1130,6 +923,229 @@ Begin VB.Form frmMapAtt
          Width           =   735
       End
    End
+   Begin VB.PictureBox picAtt26 
+      Height          =   1815
+      Left            =   120
+      ScaleHeight     =   1755
+      ScaleWidth      =   4035
+      TabIndex        =   96
+      Top             =   600
+      Visible         =   0   'False
+      Width           =   4095
+      Begin VB.CheckBox chkShiftFG 
+         Caption         =   "FG"
+         Height          =   195
+         Left            =   1920
+         TabIndex        =   108
+         Top             =   1200
+         Width           =   1095
+      End
+      Begin VB.CheckBox chkShiftFG2 
+         Caption         =   "FG2"
+         Height          =   195
+         Left            =   1920
+         TabIndex        =   107
+         Top             =   1440
+         Width           =   1095
+      End
+      Begin VB.CheckBox chkShiftBG 
+         Caption         =   "BG"
+         Height          =   195
+         Left            =   1200
+         TabIndex        =   106
+         Top             =   1200
+         Width           =   1095
+      End
+      Begin VB.CheckBox chkShiftBG2 
+         Caption         =   "BG2"
+         Height          =   195
+         Left            =   1200
+         TabIndex        =   105
+         Top             =   1440
+         Width           =   1095
+      End
+      Begin VB.HScrollBar sclShiftY 
+         Height          =   255
+         Left            =   360
+         Max             =   256
+         TabIndex        =   102
+         Top             =   600
+         Value           =   128
+         Width           =   3255
+      End
+      Begin VB.HScrollBar sclShiftX 
+         Height          =   255
+         Left            =   360
+         Max             =   256
+         TabIndex        =   99
+         Top             =   240
+         Value           =   128
+         Width           =   3255
+      End
+      Begin VB.CheckBox chkShiftGround 
+         Caption         =   "Ground"
+         Height          =   195
+         Left            =   120
+         TabIndex        =   98
+         Top             =   1200
+         Width           =   1095
+      End
+      Begin VB.CheckBox chkShiftGround2 
+         Caption         =   "Ground 2"
+         Height          =   195
+         Left            =   120
+         TabIndex        =   97
+         Top             =   1440
+         Width           =   1095
+      End
+      Begin VB.Label Label16 
+         Caption         =   "Y"
+         Height          =   255
+         Left            =   120
+         TabIndex        =   104
+         Top             =   600
+         Width           =   975
+      End
+      Begin VB.Label lblShiftY 
+         Alignment       =   2  'Center
+         Caption         =   "0"
+         Height          =   255
+         Left            =   3600
+         TabIndex        =   103
+         Top             =   600
+         Width           =   375
+      End
+      Begin VB.Label Label13 
+         Caption         =   "X"
+         Height          =   255
+         Left            =   120
+         TabIndex        =   101
+         Top             =   240
+         Width           =   975
+      End
+      Begin VB.Label lblShiftX 
+         Alignment       =   2  'Center
+         Caption         =   "0"
+         Height          =   255
+         Left            =   3600
+         TabIndex        =   100
+         Top             =   240
+         Width           =   375
+      End
+   End
+   Begin VB.PictureBox picAtt25 
+      Height          =   1815
+      Left            =   120
+      ScaleHeight     =   1755
+      ScaleWidth      =   4035
+      TabIndex        =   90
+      Top             =   600
+      Visible         =   0   'False
+      Width           =   4095
+      Begin VB.CheckBox chkAffectMonsters 
+         Caption         =   "Affect Monsters"
+         Height          =   195
+         Left            =   240
+         TabIndex        =   95
+         Top             =   960
+         Width           =   1575
+      End
+      Begin VB.CheckBox chkAffectPlayers 
+         Caption         =   "Affect Players"
+         Height          =   195
+         Left            =   240
+         TabIndex        =   94
+         Top             =   720
+         Width           =   1575
+      End
+      Begin VB.HScrollBar sclCutOff 
+         Height          =   255
+         Left            =   1200
+         Max             =   32
+         TabIndex        =   91
+         Top             =   240
+         Width           =   2415
+      End
+      Begin VB.Label lblCutoff 
+         Alignment       =   2  'Center
+         Caption         =   "0"
+         Height          =   255
+         Left            =   3600
+         TabIndex        =   93
+         Top             =   240
+         Width           =   375
+      End
+      Begin VB.Label Label8 
+         Caption         =   "Cut Off"
+         Height          =   255
+         Left            =   120
+         TabIndex        =   92
+         Top             =   240
+         Width           =   975
+      End
+   End
+   Begin VB.PictureBox picatt24 
+      Height          =   1815
+      Left            =   120
+      ScaleHeight     =   1755
+      ScaleWidth      =   4035
+      TabIndex        =   83
+      Top             =   600
+      Visible         =   0   'False
+      Width           =   4095
+      Begin VB.HScrollBar sclWalk 
+         Height          =   255
+         Left            =   1200
+         Max             =   31
+         TabIndex        =   85
+         Top             =   240
+         Value           =   8
+         Width           =   2415
+      End
+      Begin VB.HScrollBar sclRun 
+         Height          =   255
+         Left            =   1200
+         Max             =   31
+         TabIndex        =   84
+         Top             =   600
+         Value           =   16
+         Width           =   2415
+      End
+      Begin VB.Label Label11 
+         Caption         =   "Run Speed"
+         Height          =   255
+         Left            =   120
+         TabIndex        =   89
+         Top             =   600
+         Width           =   855
+      End
+      Begin VB.Label Label9 
+         Caption         =   "Walk Speed"
+         Height          =   255
+         Left            =   120
+         TabIndex        =   88
+         Top             =   240
+         Width           =   975
+      End
+      Begin VB.Label lblWalk 
+         Alignment       =   2  'Center
+         Caption         =   "8"
+         Height          =   255
+         Left            =   3600
+         TabIndex        =   87
+         Top             =   240
+         Width           =   375
+      End
+      Begin VB.Label lblRun 
+         Alignment       =   2  'Center
+         Caption         =   "16"
+         Height          =   255
+         Left            =   3600
+         TabIndex        =   86
+         Top             =   600
+         Width           =   375
+      End
+   End
    Begin VB.Label lblAtt 
       Alignment       =   2  'Center
       BeginProperty Font 
@@ -1193,9 +1209,9 @@ Private Sub btnOk_Click()
         For A = 0 To 7
             If chkDirections(A).value = 1 Then SetBit CurAttData(0), CByte(A)
         Next A
-        CurAttData(1) = chkKeep.value
-        CurAttData(2) = chkNoMonster.value
-        CurAttData(3) = 0
+        CurAttData(1) = chkKeep
+        CurAttData(2) = chkNoMonster
+        CurAttData(3) = chkAllowProjectilesFrom + chkAllowProjectilesTo * 2
     Case 19    'Light Tile
         CurAttData(0) = sclRadius
         CurAttData(1) = sclIntensity
@@ -1331,8 +1347,11 @@ Private Sub Form_Load()
             For A = 0 To 7
                 If ExamineBit(CurAttData(0), CByte(A)) = True Then chkDirections(A).value = 1
             Next A
-            chkKeep.value = CurAttData(1)
-            chkNoMonster.value = CurAttData(2)
+            
+            If ExamineBit(CurAttData(1), 0) = True Then chkKeep.value = 1
+            If ExamineBit(CurAttData(2), 0) = True Then chkNoMonster.value = 1
+            If ExamineBit(CurAttData(3), 0) = True Then chkAllowProjectilesFrom.value = 1
+            If ExamineBit(CurAttData(3), 1) = True Then chkAllowProjectilesTo.value = 1
         End If
     Case 19    'Light
         lblAtt = "19 - Light"
