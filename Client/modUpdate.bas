@@ -920,20 +920,23 @@ Sub DrawTile(tileIndex As Integer, X As Byte, Y As Byte, layer As Byte, Att As B
     TileSource.Right = (((tileIndex - 1) Mod 7) * 32) + 32 - trimRight
     TileSource.Bottom = (Int((tileIndex - 1) / 7) * 32) + 32 - trimBottom
     
-    Dim drawX As Long, DrawY As Long
+    Dim DrawX As Long, DrawY As Long
+    Dim Width As Long, Height As Long
     
-    drawX = X * 32 + trimLeft + shiftX
+    DrawX = X * 32 + trimLeft + shiftX
     DrawY = Y * 32 + trimTop + shiftY
+    Width = TileSource.Right - TileSource.Left
+    Height = TileSource.Bottom - TileSource.Top
     
     'clip off bits that are outside of drawing area
-    If drawX < 0 Then TileSource.Left = TileSource.Left - drawX: drawX = 0
+    If DrawX < 0 Then TileSource.Left = TileSource.Left - DrawX: DrawX = 0
     If DrawY < 0 Then TileSource.Top = TileSource.Top - DrawY: DrawY = 0
-    If drawX > (384 - 32) Then TileSource.Right = TileSource.Right - drawX + 384 - 32
-    If DrawY > (384 - 32) Then TileSource.Bottom = TileSource.Bottom - DrawY + 384 - 32
+    If DrawX > (384 - Width) Then TileSource.Right = TileSource.Right - DrawX + 384 - Width
+    If DrawY > (384 - Height) Then TileSource.Bottom = TileSource.Bottom - DrawY + 384 - Height
         
-    Call Surface.BltFast(drawX, DrawY, DDSTiles, TileSource, DDBLTFAST_SRCCOLORKEY)
+    Call Surface.BltFast(DrawX, DrawY, DDSTiles, TileSource, DDBLTFAST_SRCCOLORKEY)
     If Not surface2 Is Nothing Then
-        Call surface2.BltFast(drawX, DrawY, DDSTiles, TileSource, DDBLTFAST_SRCCOLORKEY)
+        Call surface2.BltFast(DrawX, DrawY, DDSTiles, TileSource, DDBLTFAST_SRCCOLORKEY)
     End If
 End Sub
 
