@@ -819,79 +819,31 @@ Sub DrawMap()
 End Sub
 
 Sub DrawMapTile(Map As MapData, X As Byte, Y As Byte)
+    Dim shiftX As Long, shiftY As Long
+    
     With Map.Tile(X, Y)
         If .Ground > 0 Then
-            DrawTile BGTile1Buffer, .Ground, X, Y
-            DrawTile BGTile2Buffer, .Ground, X, Y
+            DrawTile .Ground, X, Y, layerGround, .Att, .AttData
         End If
         If .Ground2 > 0 Then
-            DrawTile BGTile1Buffer, .Ground2, X, Y
-            DrawTile BGTile2Buffer, .Ground2, X, Y
+            DrawTile .Ground2, X, Y, layerGround2, .Att, .AttData
         End If
         If .BGTile1 > 0 Then
-            DrawTile BGTile1Buffer, .BGTile1, X, Y
+            DrawTile .BGTile1, X, Y, layerBG, .Att, .AttData
         End If
         If .BGTile2 > 0 Then
-            DrawTile BGTile2Buffer, .BGTile2, X, Y
+            DrawTile .BGTile2, X, Y, layerBG2, .Att, .AttData
         ElseIf .BGTile1 > 0 Then
-            DrawTile BGTile2Buffer, .BGTile1, X, Y
+            DrawTile .BGTile1, X, Y, layerBG2, .Att, .AttData, True
         End If
         If .FGTile > 0 Then
-            If .Att = 23 Then
-                If (ExamineBit(.AttData(0), 4) = False) Then 'bg checked tiles are visible
-                    If (ExamineBit(.AttData(0), 0) = True) Then DrawTile BGTile1Buffer, .FGTile, X, Y, 16, 0, 0, 16 'upper right
-                    If (ExamineBit(.AttData(0), 1) = True) Then DrawTile BGTile1Buffer, .FGTile, X, Y, 0, 16, 0, 16 'upper left
-                    If (ExamineBit(.AttData(0), 2) = True) Then DrawTile BGTile1Buffer, .FGTile, X, Y, 0, 16, 16, 0 'lower left
-                    If (ExamineBit(.AttData(0), 3) = True) Then DrawTile BGTile1Buffer, .FGTile, X, Y, 16, 0, 16, 0 'lower right
-                End If
-                
-                If (ExamineBit(.AttData(0), 5) = False) Then 'unchecked checked tiles are visible
-                    If (ExamineBit(.AttData(0), 0) = False) Then DrawTile FGTileBuffer, .FGTile, X, Y, 16, 0, 0, 16 'upper right
-                    If (ExamineBit(.AttData(0), 1) = False) Then DrawTile FGTileBuffer, .FGTile, X, Y, 0, 16, 0, 16 'upper left
-                    If (ExamineBit(.AttData(0), 2) = False) Then DrawTile FGTileBuffer, .FGTile, X, Y, 0, 16, 16, 0 'lower left
-                    If (ExamineBit(.AttData(0), 3) = False) Then DrawTile FGTileBuffer, .FGTile, X, Y, 16, 0, 16, 0 'lower right
-                End If
-            Else
-                DrawTile FGTileBuffer, .FGTile, X, Y
-            End If
+            DrawTile .FGTile, X, Y, layerFG, .Att, .AttData
         End If
         
         If .FGTile2 > 0 Then
-            If .Att = 23 Then
-                If (ExamineBit(.AttData(0), 4) = False) Then 'bg checked tiles are visible
-                    If (ExamineBit(.AttData(0), 0) = True) Then DrawTile BGTile2Buffer, .FGTile2, X, Y, 16, 0, 0, 16 'upper right
-                    If (ExamineBit(.AttData(0), 1) = True) Then DrawTile BGTile2Buffer, .FGTile2, X, Y, 0, 16, 0, 16 'upper left
-                    If (ExamineBit(.AttData(0), 2) = True) Then DrawTile BGTile2Buffer, .FGTile2, X, Y, 0, 16, 16, 0 'lower left
-                    If (ExamineBit(.AttData(0), 3) = True) Then DrawTile BGTile2Buffer, .FGTile2, X, Y, 16, 0, 16, 0 'lower right
-                End If
-                
-                If (ExamineBit(.AttData(0), 5) = False) Then 'unchecked checked tiles are visible
-                    If (ExamineBit(.AttData(0), 0) = False) Then DrawTile FGTile2Buffer, .FGTile2, X, Y, 16, 0, 0, 16 'upper right
-                    If (ExamineBit(.AttData(0), 1) = False) Then DrawTile FGTile2Buffer, .FGTile2, X, Y, 0, 16, 0, 16 'upper left
-                    If (ExamineBit(.AttData(0), 2) = False) Then DrawTile FGTile2Buffer, .FGTile2, X, Y, 0, 16, 16, 0 'lower left
-                    If (ExamineBit(.AttData(0), 3) = False) Then DrawTile FGTile2Buffer, .FGTile2, X, Y, 16, 0, 16, 0 'lower right
-                End If
-            Else
-                DrawTile FGTile2Buffer, .FGTile2, X, Y
-            End If
+            DrawTile .FGTile2, X, Y, layerFG2, .Att, .AttData
         ElseIf .FGTile > 0 Then
-            If .Att = 23 Then
-                If (ExamineBit(.AttData(0), 4) = False) Then 'bg checked tiles are visible
-                    If (ExamineBit(.AttData(0), 0) = True) Then DrawTile BGTile2Buffer, .FGTile, X, Y, 16, 0, 0, 16 'upper right
-                    If (ExamineBit(.AttData(0), 1) = True) Then DrawTile BGTile2Buffer, .FGTile, X, Y, 0, 16, 0, 16 'upper left
-                    If (ExamineBit(.AttData(0), 2) = True) Then DrawTile BGTile2Buffer, .FGTile, X, Y, 0, 16, 16, 0 'lower left
-                    If (ExamineBit(.AttData(0), 3) = True) Then DrawTile BGTile2Buffer, .FGTile, X, Y, 16, 0, 16, 0 'lower right
-                End If
-                
-                If (ExamineBit(.AttData(0), 5) = False) Then 'unchecked checked tiles are visible
-                    If (ExamineBit(.AttData(0), 0) = False) Then DrawTile FGTile2Buffer, .FGTile, X, Y, 16, 0, 0, 16 'upper right
-                    If (ExamineBit(.AttData(0), 1) = False) Then DrawTile FGTile2Buffer, .FGTile, X, Y, 0, 16, 0, 16 'upper left
-                    If (ExamineBit(.AttData(0), 2) = False) Then DrawTile FGTile2Buffer, .FGTile, X, Y, 0, 16, 16, 0 'lower left
-                    If (ExamineBit(.AttData(0), 3) = False) Then DrawTile FGTile2Buffer, .FGTile, X, Y, 16, 0, 16, 0 'lower right
-                End If
-            Else
-                DrawTile FGTile2Buffer, .FGTile, X, Y
-            End If
+            DrawTile .FGTile, X, Y, layerFG2, .Att, .AttData, True
         End If
         
         If EditMode >= 6 And MapEdit Then
@@ -910,14 +862,79 @@ Sub DrawMapTile(Map As MapData, X As Byte, Y As Byte)
     End With
 End Sub
 
-Sub DrawTile(ByRef Surface As DirectDrawSurface4, tileIndex As Integer, X As Byte, Y As Byte, _
+Sub DrawTile(tileIndex As Integer, X As Byte, Y As Byte, layer As Byte, Att As Byte, AttData() As Byte, Optional useLayer1 As Boolean = False, _
     Optional trimLeft As Long = 0, Optional trimRight As Long = 0, Optional trimTop As Long = 0, Optional trimBottom As Long = 0)
+
+    Dim shiftX As Long, shiftY As Long
+
+    Dim Surface As DirectDrawSurface4
+    Dim surface2 As DirectDrawSurface4
+
+    If layer = layerFG Or layer = layerFG2 Then
+        If Att = 23 Then
+            If (ExamineBit(AttData(0), 4) = False) Then 'bg checked tiles are visible
+                If (ExamineBit(AttData(0), 0) = True) Then DrawTile tileIndex, X, Y, IIf(layer = layerFG, layerBG, layerBG2), 0, AttData, useLayer1, 16, 0, 0, 16  'upper right
+                If (ExamineBit(AttData(0), 1) = True) Then DrawTile tileIndex, X, Y, IIf(layer = layerFG, layerBG, layerBG2), 0, AttData, useLayer1, 0, 16, 0, 16 'upper left
+                If (ExamineBit(AttData(0), 2) = True) Then DrawTile tileIndex, X, Y, IIf(layer = layerFG, layerBG, layerBG2), 0, AttData, useLayer1, 0, 16, 16, 0 'lower left
+                If (ExamineBit(AttData(0), 3) = True) Then DrawTile tileIndex, X, Y, IIf(layer = layerFG, layerBG, layerBG2), 0, AttData, useLayer1, 16, 0, 16, 0 'lower right
+            End If
+            
+            If (ExamineBit(AttData(0), 5) = False) Then 'unchecked checked tiles are visible
+                If (ExamineBit(AttData(0), 0) = False) Then DrawTile tileIndex, X, Y, layer, 0, AttData, useLayer1, 16, 0, 0, 16 'upper right
+                If (ExamineBit(AttData(0), 1) = False) Then DrawTile tileIndex, X, Y, layer, 0, AttData, useLayer1, 0, 16, 0, 16 'upper left
+                If (ExamineBit(AttData(0), 2) = False) Then DrawTile tileIndex, X, Y, layer, 0, AttData, useLayer1, 0, 16, 16, 0 'lower left
+                If (ExamineBit(AttData(0), 3) = False) Then DrawTile tileIndex, X, Y, layer, 0, AttData, useLayer1, 16, 0, 16, 0 'lower right
+            End If
+            Exit Sub
+        End If
+    End If
+    
+    Dim effectiveLayer As Byte
+    effectiveLayer = IIf(useLayer1, layer - 1, layer)
+    If Att = 26 Then
+        If ExamineBit(AttData(2), effectiveLayer) = True Then
+            shiftX = AttData(0) - 128
+            shiftY = AttData(1) - 128
+        End If
+    End If
+    
+    Select Case layer
+        Case layerGround:
+            Set Surface = BGTile1Buffer
+            Set surface2 = BGTile2Buffer
+        Case layerGround2:
+            Set Surface = BGTile1Buffer
+            Set surface2 = BGTile2Buffer
+        Case layerBG:
+            Set Surface = BGTile1Buffer
+        Case layerBG2:
+            Set Surface = BGTile2Buffer
+        Case layerFG:
+            Set Surface = FGTileBuffer
+        Case layerFG2:
+            Set Surface = FGTile2Buffer
+    End Select
     
     TileSource.Left = (((tileIndex - 1) Mod 7) * 32) + trimLeft
     TileSource.Top = (Int((tileIndex - 1) / 7) * 32) + trimTop
     TileSource.Right = (((tileIndex - 1) Mod 7) * 32) + 32 - trimRight
     TileSource.Bottom = (Int((tileIndex - 1) / 7) * 32) + 32 - trimBottom
-    Call Surface.BltFast(X * 32 + trimLeft, Y * 32 + trimTop, DDSTiles, TileSource, DDBLTFAST_SRCCOLORKEY)
+    
+    Dim drawX As Long, DrawY As Long
+    
+    drawX = X * 32 + trimLeft + shiftX
+    DrawY = Y * 32 + trimTop + shiftY
+    
+    'clip off bits that are outside of drawing area
+    If drawX < 0 Then TileSource.Left = TileSource.Left - drawX: drawX = 0
+    If DrawY < 0 Then TileSource.Top = TileSource.Top - DrawY: DrawY = 0
+    If drawX > (384 - 32) Then TileSource.Right = TileSource.Right - drawX + 384 - 32
+    If DrawY > (384 - 32) Then TileSource.Bottom = TileSource.Bottom - DrawY + 384 - 32
+        
+    Call Surface.BltFast(drawX, DrawY, DDSTiles, TileSource, DDBLTFAST_SRCCOLORKEY)
+    If Not surface2 Is Nothing Then
+        Call surface2.BltFast(drawX, DrawY, DDSTiles, TileSource, DDBLTFAST_SRCCOLORKEY)
+    End If
 End Sub
 
 Sub DrawObject(ByRef Surface As DirectDrawSurface4, objectIndex As Long, X As Byte, Y As Byte)

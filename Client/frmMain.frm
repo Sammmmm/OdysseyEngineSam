@@ -4686,7 +4686,7 @@ Private Sub lblEditMode_MouseUp(index As Integer, Button As Integer, Shift As In
             If A >= 6 Then RedrawMap = True
             If A = 7 Then
                 Select Case CurAtt
-                Case 2, 3, 7, 8, 9, 17, 19, 20, 21, 23, 24, 25    'Warp, Key, Object, Touch Plate, Damage, Directional Wall, Light, Dampening Wall, Object Picture, half tile, speed tile, half player
+                Case 2, 3, 7, 8, 9, 17, 19, 20, 21, 23, 24, 25, 26    'Warp, Key, Object, Touch Plate, Damage, Directional Wall, Light, Dampening Wall, Object Picture, half tile, speed tile, half player, tile shift tile
                     CurAtt = 0
                 Case Else
                     lblCurTile = CurAtt
@@ -5237,7 +5237,7 @@ Private Sub picTiles_MouseDown(Button As Integer, Shift As Integer, X As Single,
                 NewAtt = Int(Y / 32) * 7 + Int(X / 32) + 1
                 If NewAtt <= MaxAtt Then
                     Select Case NewAtt
-                    Case 2, 3, 7, 8, 9, 17, 19, 20, 21, 23, 24, 25   'Warp, Key, Object, Touch Plate, Damage, Directional Wall, Light, Dampening Wall, Object Picture, half tile, speed tile, half player
+                    Case 2, 3, 7, 8, 9, 17, 19, 20, 21, 23, 24, 25, 26   'Warp, Key, Object, Touch Plate, Damage, Directional Wall, Light, Dampening Wall, Object Picture, half tile, speed tile, half player, tile shift tile
                         frmMapAtt.Show 1
                     Case Else
                         CurAtt = NewAtt
@@ -5249,7 +5249,7 @@ Private Sub picTiles_MouseDown(Button As Integer, Shift As Integer, X As Single,
                 NewAtt = Int(Y / 32) * 7 + Int(X / 32) + 1
                 If NewAtt <= MaxAtt Then
                     Select Case NewAtt
-                    Case 2, 3, 7, 8, 9, 17, 19, 20, 21, 23, 24, 25 'Warp, Key, Object, Touch Plate, Damage, Directional Wall, Light, Dampening Wall, Object Picture, half tile, speed tile, half player
+                    Case 2, 3, 7, 8, 9, 17, 19, 20, 21, 23, 24, 25, 26 'Warp, Key, Object, Touch Plate, Damage, Directional Wall, Light, Dampening Wall, Object Picture, half tile, speed tile, half player, tile shift tile
 
                     Case Else
                         CurAtt = NewAtt

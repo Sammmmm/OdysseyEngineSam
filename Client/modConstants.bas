@@ -10,6 +10,14 @@ Public Const MonsterWalkSpeed = 8
 Public Const MonsterRunSpeed = 16
 Public Const ProjectileSpeed = 32
 
+'Layers
+Public Const layerGround = 0
+Public Const layerGround2 = 1
+Public Const layerBG = 2
+Public Const layerBG2 = 3
+Public Const layerFG = 4
+Public Const layerFG2 = 5
+
 'Editing Mode Constants
 Public ListEditMode As Byte
 Public Const modeObjects = 1
@@ -34,7 +42,7 @@ Public Const MaxHalls = 255
 Public Const MaxModifications = 255
 Public Const MaxTotalMonsters = 1000
 Public Const MaxObjects = 1000
-Public Const MaxAtt = 25
+Public Const MaxAtt = 26
 Public Const NumClasses = 4
 Public Const MaxUsers = 80
 Public Const MaxProjectiles = 20

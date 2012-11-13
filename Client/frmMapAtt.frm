@@ -14,6 +14,116 @@ Begin VB.Form frmMapAtt
    ScaleHeight     =   3090
    ScaleWidth      =   4860
    StartUpPosition =   2  'CenterScreen
+   Begin VB.PictureBox picAtt26 
+      Height          =   1815
+      Left            =   120
+      ScaleHeight     =   1755
+      ScaleWidth      =   4035
+      TabIndex        =   96
+      Top             =   600
+      Visible         =   0   'False
+      Width           =   4095
+      Begin VB.CheckBox chkShiftFG 
+         Caption         =   "FG"
+         Height          =   195
+         Left            =   1920
+         TabIndex        =   108
+         Top             =   1200
+         Width           =   1095
+      End
+      Begin VB.CheckBox chkShiftFG2 
+         Caption         =   "FG2"
+         Height          =   195
+         Left            =   1920
+         TabIndex        =   107
+         Top             =   1440
+         Width           =   1095
+      End
+      Begin VB.CheckBox chkShiftBG 
+         Caption         =   "BG"
+         Height          =   195
+         Left            =   1200
+         TabIndex        =   106
+         Top             =   1200
+         Width           =   1095
+      End
+      Begin VB.CheckBox chkShiftBG2 
+         Caption         =   "BG2"
+         Height          =   195
+         Left            =   1200
+         TabIndex        =   105
+         Top             =   1440
+         Width           =   1095
+      End
+      Begin VB.HScrollBar sclShiftY 
+         Height          =   255
+         Left            =   360
+         Max             =   256
+         TabIndex        =   102
+         Top             =   600
+         Value           =   128
+         Width           =   3255
+      End
+      Begin VB.HScrollBar sclShiftX 
+         Height          =   255
+         Left            =   360
+         Max             =   256
+         TabIndex        =   99
+         Top             =   240
+         Value           =   128
+         Width           =   3255
+      End
+      Begin VB.CheckBox chkShiftGround 
+         Caption         =   "Ground"
+         Height          =   195
+         Left            =   120
+         TabIndex        =   98
+         Top             =   1200
+         Width           =   1095
+      End
+      Begin VB.CheckBox chkShiftGround2 
+         Caption         =   "Ground 2"
+         Height          =   195
+         Left            =   120
+         TabIndex        =   97
+         Top             =   1440
+         Width           =   1095
+      End
+      Begin VB.Label Label16 
+         Caption         =   "Y"
+         Height          =   255
+         Left            =   120
+         TabIndex        =   104
+         Top             =   600
+         Width           =   975
+      End
+      Begin VB.Label lblShiftY 
+         Alignment       =   2  'Center
+         Caption         =   "0"
+         Height          =   255
+         Left            =   3600
+         TabIndex        =   103
+         Top             =   600
+         Width           =   375
+      End
+      Begin VB.Label Label13 
+         Caption         =   "X"
+         Height          =   255
+         Left            =   120
+         TabIndex        =   101
+         Top             =   240
+         Width           =   975
+      End
+      Begin VB.Label lblShiftX 
+         Alignment       =   2  'Center
+         Caption         =   "0"
+         Height          =   255
+         Left            =   3600
+         TabIndex        =   100
+         Top             =   240
+         Width           =   375
+      End
+   End
    Begin VB.PictureBox picAtt25 
       Height          =   1815
       Left            =   120
@@ -1163,6 +1273,10 @@ Private Sub btnOk_Click()
         CurAttData(1) = chkAffectPlayers + chkAffectMonsters * 2
         CurAttData(2) = 0
         CurAttData(3) = 0
+    Case 26 'shift tile
+        CurAttData(0) = sclShiftX
+        CurAttData(1) = sclShiftY
+        CurAttData(2) = chkShiftGround + chkShiftGround2 * 2 + chkShiftBG * 4 + chkShiftBG2 * 8 + chkShiftFG * 16 + chkShiftFG2 * 32
     End Select
     Unload Me
 End Sub
@@ -1245,23 +1359,44 @@ Private Sub Form_Load()
     Case 23 'half tile
         lblAtt = "23 - Half Tile"
         picAtt23.Visible = True
-        If (ExamineBit(CurAttData(0), 0)) Then chkAtt23(0).value = 1
-        If (ExamineBit(CurAttData(0), 1)) Then chkAtt23(1).value = 1
-        If (ExamineBit(CurAttData(0), 2)) Then chkAtt23(2).value = 1
-        If (ExamineBit(CurAttData(0), 3)) Then chkAtt23(3).value = 1
-        If (ExamineBit(CurAttData(0), 4)) Then chkAtt23(4).value = 1
-        If (ExamineBit(CurAttData(0), 5)) Then chkAtt23(5).value = 1
+        If CurAtt = 23 Then
+            If (ExamineBit(CurAttData(0), 0)) Then chkAtt23(0).value = 1
+            If (ExamineBit(CurAttData(0), 1)) Then chkAtt23(1).value = 1
+            If (ExamineBit(CurAttData(0), 2)) Then chkAtt23(2).value = 1
+            If (ExamineBit(CurAttData(0), 3)) Then chkAtt23(3).value = 1
+            If (ExamineBit(CurAttData(0), 4)) Then chkAtt23(4).value = 1
+            If (ExamineBit(CurAttData(0), 5)) Then chkAtt23(5).value = 1
+        End If
     Case 24 'Speed Mod
         lblAtt = "24 - Speed Mod"
         picatt24.Visible = True
-        sclWalk = CurAttData(0)
-        sclRun = CurAttData(1)
+        If CurAtt = 24 Then
+            sclWalk = CurAttData(0)
+            sclRun = CurAttData(1)
+        End If
     Case 25 'sprite half tile
         lblAtt = "25 - Sprite Half Tile"
         picAtt25.Visible = True
-        sclCutOff = CurAttData(0)
-        If (ExamineBit(CurAttData(1), 0)) Then chkAffectPlayers.value = 1
-        If (ExamineBit(CurAttData(1), 1)) Then chkAffectMonsters.value = 1
+        If CurAtt = 25 Then
+            sclCutOff = CurAttData(0)
+            If (ExamineBit(CurAttData(1), 0)) Then chkAffectPlayers.value = 1
+            If (ExamineBit(CurAttData(1), 1)) Then chkAffectMonsters.value = 1
+        End If
+    Case 26 'shift tile
+        lblAtt = "26 - Tile Shift"
+        picAtt26.Visible = True
+        If CurAtt = 26 Then
+
+            sclShiftX = CurAttData(0)
+            sclShiftY = CurAttData(1)
+
+            If (ExamineBit(CurAttData(2), 0)) Then chkShiftGround.value = 1
+            If (ExamineBit(CurAttData(2), 1)) Then chkShiftGround2.value = 1
+            If (ExamineBit(CurAttData(2), 2)) Then chkShiftBG.value = 1
+            If (ExamineBit(CurAttData(2), 3)) Then chkShiftBG2.value = 1
+            If (ExamineBit(CurAttData(2), 4)) Then chkShiftFG.value = 1
+            If (ExamineBit(CurAttData(2), 5)) Then chkShiftFG2.value = 1
+        End If
     End Select
 End Sub
 
@@ -1390,6 +1525,14 @@ End Sub
 
 Private Sub sclRun_Change()
     lblRun = Str(sclRun)
+End Sub
+
+Private Sub sclShiftX_Change()
+    lblShiftX = Str(sclShiftX - 128)
+End Sub
+
+Private Sub sclShiftY_Change()
+    lblShiftY = Str(sclShiftY - 128)
 End Sub
 
 Private Sub sclWalk_Change()
