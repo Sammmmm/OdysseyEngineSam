@@ -77,7 +77,7 @@ Private Sub Form_Load()
     Dim File As String
     Dim FileByteArray() As Byte
 
-    File = "wait.rsc"
+    File = GetAssetPath("wait.rsc")
     FileByteArray() = StrConv(File, vbFromUnicode)
     ReDim Preserve FileByteArray(UBound(FileByteArray) + 1)
 

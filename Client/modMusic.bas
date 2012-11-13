@@ -4,10 +4,11 @@ Option Explicit
 Public mus(1 To 28) As Long
 
 Sub LoadMusic()
-    Dim i As Long
+    Dim i As Long, path As String
     For i = 1 To 28
-        If Exists("mus" + CStr(i) + ".mid") Then
-            mus(i) = FMUSIC_LoadSong(App.Path + "\mus" + CStr(i) + ".mid")
+        path = GetAssetPath("Music/mus" + CStr(i) + ".mid")
+        If Exists(path) Then
+            mus(i) = FMUSIC_LoadSong(path)
             If mus(i) > 0 Then FMUSIC_SetLooping mus(i), 1
         End If
     Next i
@@ -16,9 +17,10 @@ End Sub
 Sub UnloadMusic()
     StopMidi
 
-    Dim i As Long
+    Dim i As Long, path As String
     For i = 1 To 28
-        If Exists("mus" + CStr(i) + ".mid") Then
+        path = GetAssetPath("Music/mus" + CStr(i) + ".mid")
+        If Exists(path) Then
             If mus(i) > 0 Then
                 FMUSIC_FreeSong (mus(i))
             End If

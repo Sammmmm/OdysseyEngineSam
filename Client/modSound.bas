@@ -6,18 +6,20 @@ Dim snd(1 To 9) As Long
 Sub InitSound()
     FSOUND_Init 44100, 32, 0
 
-    Dim i As Long
+    Dim i As Long, path As String
     For i = 1 To 9
-        If Exists("sound" + CStr(i) + ".wav") Then
-            snd(i) = FSOUND_Sample_Load(FSOUND_FREE, App.Path + "\sound" + CStr(i) + ".wav", FSOUND_LOOP_OFF, 0, 0)
+        path = GetAssetPath("SFX/sound" + CStr(i) + ".wav")
+        If Exists(path) Then
+            snd(i) = FSOUND_Sample_Load(FSOUND_FREE, path, FSOUND_LOOP_OFF, 0, 0)
         End If
     Next i
 End Sub
 
 Sub UnloadSound()
-    Dim i As Long
+    Dim i As Long, path As String
     For i = 1 To 9
-        If Exists("sound" + CStr(i) + ".wav") Then
+        path = GetAssetPath("SFX/sound" + CStr(i) + ".wav")
+        If Exists(path) Then
             If snd(i) > 0 Then
                 FSOUND_Sample_Free snd(i)
             End If

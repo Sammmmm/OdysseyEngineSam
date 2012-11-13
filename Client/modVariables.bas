@@ -6,6 +6,8 @@ Public DX7 As DirectX7
 
 'Server Details
 Public CacheDirectory As String
+Public AssetDirectory As String
+Public CommonDirectory As String
 Public ServerDescription As String
 Public MOTDText As String
 

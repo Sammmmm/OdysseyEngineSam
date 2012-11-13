@@ -132,15 +132,15 @@ Public Sub LoadSurfaces()
     FGTile2Buffer.SetColorKey DDCKEY_SRCBLT, DDCK
     InventoryBuffer.SetColorKey DDCKEY_SRCBLT, DDCK
 
-    LoadProtectedSurface DDSEffects, App.Path + "\effects.rsc"
-    LoadProtectedSurface DDSObjects, App.Path + "\objects.rsc"
-    LoadProtectedSurface DDSSprites, App.Path + "\sprites.rsc"
-    LoadProtectedSurface DDSTiles, App.Path + "\tiles.rsc"
-    LoadProtectedSurface DDSAtts, App.Path + "\atts.rsc"
-    LoadProtectedSurface DDSHPBar, App.Path + "\hpbar.rsc"
-    LoadProtectedSurface DDSInventory, App.Path + "\inventory.rsc"
-    LoadProtectedSurface DDSInterfaceLights, App.Path + "\InterfaceLights.rsc"
-    LoadProtectedSurface DDSStats, App.Path + "\stats.rsc"
+    LoadProtectedSurface DDSEffects, GetAssetPath("effects.rsc")
+    LoadProtectedSurface DDSObjects, GetAssetPath("objects.rsc")
+    LoadProtectedSurface DDSSprites, GetAssetPath("sprites.rsc")
+    LoadProtectedSurface DDSTiles, GetAssetPath("tiles.rsc")
+    LoadProtectedSurface DDSAtts, GetAssetPath("atts.rsc")
+    LoadProtectedSurface DDSHPBar, GetAssetPath("hpbar.rsc")
+    LoadProtectedSurface DDSInventory, GetAssetPath("inventory.rsc")
+    LoadProtectedSurface DDSInterfaceLights, GetAssetPath("InterfaceLights.rsc")
+    LoadProtectedSurface DDSStats, GetAssetPath("stats.rsc")
 
     Call BackBufferSurf.BltColorFill(FullMapRect, RGB(0, 0, 0))
     Call BGTile1Buffer.BltColorFill(FullMapRect, RGB(0, 0, 0))

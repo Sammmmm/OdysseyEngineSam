@@ -22,7 +22,7 @@ Sub WaitForTerm(pid As Long)
 End Sub
 
 Sub DelItem(lpAppName As String, lpKeyName As String)
-    WritePrivateProfileString lpAppName, lpKeyName, 0&, App.Path + "\odyssey.ini"
+    WritePrivateProfileString lpAppName, lpKeyName, 0&, App.path + "\odyssey.ini"
 End Sub
 
 Sub LoadMacros()
@@ -829,7 +829,7 @@ Sub OpenMapEdit()
 
     Dim File As String
 
-    File = "tiles.rsc"
+    File = GetAssetPath("tiles.rsc")
     GetBitmapDimensions File, Width, Height
 
     frmMain.MapScroll.max = Int(Height / 32) - 7
@@ -844,13 +844,13 @@ End Sub
 
 
 Function ReadInt(lpAppName, lpKeyName$) As Integer
-    ReadInt = GetPrivateProfileInt&(lpAppName, lpKeyName$, 0, App.Path + "\odyssey.ini")
+    ReadInt = GetPrivateProfileInt&(lpAppName, lpKeyName$, 0, App.path + "\odyssey.ini")
 End Function
 
 Function ReadString(lpAppName, lpKeyName As String) As String
     Dim lpReturnedString As String, Valid As Long
     lpReturnedString = Space$(256)
-    Valid = GetPrivateProfileString&(lpAppName, lpKeyName, "", lpReturnedString, 256, App.Path + "\odyssey.ini")
+    Valid = GetPrivateProfileString&(lpAppName, lpKeyName, "", lpReturnedString, 256, App.path + "\odyssey.ini")
     ReadString = Left$(lpReturnedString, Valid)
 End Function
 
@@ -953,7 +953,7 @@ End Sub
 Sub WriteString(lpAppName, lpKeyName As String, A, Optional FileString As String = "odyssey.ini")
     Dim lpString As String, Valid As Long
     lpString = A
-    Valid = WritePrivateProfileString&(lpAppName, lpKeyName, lpString, App.Path + "\" + FileString)
+    Valid = WritePrivateProfileString&(lpAppName, lpKeyName, lpString, App.path + "\" + FileString)
 End Sub
 
 Sub CheckKeys()
@@ -1169,11 +1169,19 @@ Function Exists(filename As String) As Boolean
     Exists = (Dir(filename) <> vbNullString)
 End Function
 Sub CheckFile(filename As String)
-    If Exists(filename) = False Then
+    If Exists(filename) = False And Exists(AssetDirectory & filename) = False And Exists(CommonDirectory & filename) = False Then
         MsgBox "Error: File " + Chr$(34) + filename + Chr$(34) + " not found!", vbOKOnly + vbExclamation, TitleString
         End
     End If
 End Sub
+
+Function GetAssetPath(filename As String) As String
+    If Exists(AssetDirectory & filename) = True Then
+        GetAssetPath = AssetDirectory & filename
+    Else
+        GetAssetPath = CommonDirectory & filename
+    End If
+End Function
 
 Sub CloseClientSocket(Action As Byte)
 
@@ -1333,6 +1341,7 @@ Sub Main()
     Params = Split(Command$, " ")
     
    
+    CommonDirectory = "Assets/Common/"
     If UBound(Params) = -1 Then
         ServerIP = "127.0.0.1"
         ServerPort = 5750
@@ -1345,6 +1354,14 @@ Sub Main()
         Else
             CacheDirectory = Params(2)
         End If
+        
+        If UBound(Params) < 3 Then
+            AssetDirectory = "Assets/Common/"
+        Else
+            AssetDirectory = "Assets/" & Params(3) & "/"
+        End If
+        
+        
     End If
     
 
@@ -1352,9 +1369,9 @@ Sub Main()
     Kill "update.dat"
     On Error GoTo 0
 
-    InitPath = App.Path
-    ChDir App.Path
-    CurDir App.Path
+    InitPath = App.path
+    ChDir App.path
+    CurDir App.path
 
     frmWait.Show
     frmWait.Refresh

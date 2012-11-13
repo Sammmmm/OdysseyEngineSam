@@ -4634,15 +4634,15 @@ End Sub
 Private Sub Form_Load()
     frmMain_Loaded = True
 
-    CommonDialog.InitDir = App.Path
+    CommonDialog.InitDir = App.path
     CommonDialog.Filter = "Map (*.map4)|*.map4"
 
     Dim File As String
 
-    File = "interface.rsc"
+    File = GetAssetPath("interface.rsc")
     frmMain.Picture = LoadPicture(File)
 
-    File = "stats.rsc"
+    File = GetAssetPath("stats.rsc")
     frmMain.picStats.Picture = LoadPicture(File)
 
     InitializeLighting

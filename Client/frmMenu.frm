@@ -213,7 +213,7 @@ Private Sub Form_Load()
 
     Dim File As String
 
-    File = "menu.rsc"
+    File = GetAssetPath("menu.rsc")
     frmMenu.Picture = LoadPicture(File)
 
     lblCurrentServer = ServerDescription
