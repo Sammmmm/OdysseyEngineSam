@@ -3,28 +3,38 @@ Begin VB.Form frmOptions
    BackColor       =   &H0061514B&
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "The Odyssey Online Classic [Options]"
-   ClientHeight    =   3720
+   ClientHeight    =   3840
    ClientLeft      =   60
    ClientTop       =   315
-   ClientWidth     =   4320
+   ClientWidth     =   4305
    ControlBox      =   0   'False
    Icon            =   "frmOptions.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   3720
-   ScaleWidth      =   4320
+   ScaleHeight     =   3840
+   ScaleWidth      =   4305
    StartUpPosition =   2  'CenterScreen
    Begin VB.Frame fraOptions 
       Appearance      =   0  'Flat
       BackColor       =   &H0044342E&
       BorderStyle     =   0  'None
       ForeColor       =   &H80000008&
-      Height          =   3495
+      Height          =   3615
       Left            =   120
       TabIndex        =   0
       Top             =   120
       Width           =   4095
+      Begin VB.ComboBox cmbFrameRate 
+         Height          =   315
+         ItemData        =   "frmOptions.frx":1CFA
+         Left            =   2160
+         List            =   "frmOptions.frx":1D16
+         TabIndex        =   17
+         Text            =   "cmbFrameRate"
+         Top             =   2400
+         Width           =   1215
+      End
       Begin VB.CheckBox chkDisableLighting 
          BackColor       =   &H0044342E&
          Caption         =   "Disable Lighting and Weather"
@@ -57,11 +67,11 @@ Begin VB.Form frmOptions
             Strikethrough   =   0   'False
          EndProperty
          ForeColor       =   &H009AADC2&
-         Height          =   300
+         Height          =   420
          Left            =   120
          TabIndex        =   13
          Top             =   2520
-         Width           =   2895
+         Width           =   1935
       End
       Begin VB.CheckBox chkHighPriority 
          BackColor       =   &H0044342E&
@@ -218,6 +228,25 @@ Begin VB.Form frmOptions
          Top             =   480
          Width           =   1935
       End
+      Begin VB.Label lblFrameRate 
+         BackColor       =   &H0044342E&
+         Caption         =   "Frame Rate:"
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H009AADC2&
+         Height          =   255
+         Left            =   2160
+         TabIndex        =   16
+         Top             =   2160
+         Width           =   1935
+      End
       Begin VB.Label cmdMacros 
          Alignment       =   2  'Center
          Appearance      =   0  'Flat
@@ -300,7 +329,7 @@ Begin VB.Form frmOptions
          Height          =   255
          Left            =   480
          TabIndex        =   6
-         Top             =   3000
+         Top             =   3240
          Width           =   1260
       End
       Begin VB.Label btnOk 
@@ -322,7 +351,7 @@ Begin VB.Form frmOptions
          Height          =   255
          Left            =   2400
          TabIndex        =   5
-         Top             =   3000
+         Top             =   3240
          Width           =   1185
       End
    End
@@ -390,6 +419,7 @@ Private Sub btnOk_Click()
         Else
             .DisableLighting = False
         End If
+        .FrameRate = IIf(Val(cmbFrameRate.Text) > 0, Val(cmbFrameRate.Text), 1001)
     End With
     SaveOptions
     If blnPlaying = True Then
@@ -399,6 +429,7 @@ Private Sub btnOk_Click()
     End If
     Unload Me
 End Sub
+
 
 Private Sub cmdChangePassword_Click()
     frmNewPass.Show
@@ -452,6 +483,12 @@ Private Sub Form_Load()
             chkDisableLighting = 1
         Else
             chkDisableLighting = 0
+        End If
+        
+        If .FrameRate <> 1001 Then
+            cmbFrameRate.Text = .FrameRate
+        Else
+            cmbFrameRate.Text = "Unlimited"
         End If
     End With
     frmOptions_Loaded = True

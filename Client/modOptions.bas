@@ -11,6 +11,7 @@ Type OptionsData
     HighPriority As Boolean
     DisablePlayerLights As Boolean
     DisableLighting As Boolean
+    FrameRate As Long
 End Type
 
 Public options As OptionsData
@@ -53,6 +54,10 @@ Sub SaveOptions()
         Else
             WriteString "Options", "DisableLighting", "0"
         End If
+        
+        WriteString "Options", "FrameRate", Str(.FrameRate)
+        TargetFrameTicks = 1000 \ .FrameRate
+        
         WriteString "Options", "LightingQuality", CStr(.LightingQuality)
         If Character.name <> "" Then
             Dim A As Long
@@ -106,6 +111,14 @@ Sub LoadOptions()
                 .DisableLighting = False
             End If
             .LightingQuality = ReadInt("Options", "LightingQuality")
+            
+            If ReadInt("Options", "FrameRate") > 0 Then
+                .FrameRate = ReadInt("Options", "FrameRate")
+            Else
+                .FrameRate = 40
+            End If
+            TargetFrameTicks = 1000 \ .FrameRate
+            
             If Character.name <> "" Then
                 Dim A As Long
                 For A = 1 To 12

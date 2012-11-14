@@ -2,8 +2,6 @@ Attribute VB_Name = "modConstants"
 Option Explicit
 
 'Game Control Contstants
-Public Const TargetFrameRate = 40
-Public Const TargetFrameTicks = 1000 / TargetFrameRate
 Public Const TargetMoveTicks = 3200 '(must be adjusted if default cwalksteps are adjusted)
 
 Public Const MonsterWalkSpeed = 8

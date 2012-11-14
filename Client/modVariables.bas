@@ -118,6 +118,7 @@ Attribute blnEnd.VB_VarUserMemId = 1073741886
 Attribute blnPlaying.VB_VarUserMemId = 1073741886
 Public Tick As Long
 Attribute Tick.VB_VarUserMemId = 1073741888
+Public TargetFrameTicks As Long
 
 'Timers
 Public AttackTimer As Long

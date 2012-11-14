@@ -1492,9 +1492,8 @@ Sub Main()
     While blnEnd = False
         Tick = timeGetTime
         FrameCounter = FrameCounter + 1
-        AlternateFrameCounter = AlternateFrameCounter + 1
-        If AlternateFrameCounter >= 10 Then
-            AlternateFrameCounter = 0
+        If Tick >= AlternateFrameCounter Then
+            AlternateFrameCounter = Tick + 250
             CurFrame = 1 - CurFrame
         End If
         If Tick >= SecondTimer Then
