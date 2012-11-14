@@ -81,7 +81,7 @@ Private Sub btnOk_Click()
         Case modeSuffix
             SendSocket Chr$(88) + Chr$(TrueIndex)
         End Select
-        Me.Hide
+        'Me.Hide
     End If
 End Sub
 
