@@ -1044,27 +1044,7 @@ Sub CheckKeys()
         End If
     End If
     If CX * 32 = CXO And CY * 32 = CYO Then
-        If Character.Access = 0 Or keyAlt = True Then
-            If CWalkStep ^ 2 + 16 <> CWalkStep2 And Character.Access = 0 Then
-                SendSocket Chr$(68) + "Walk Hack"
-                Exit Sub
-            End If
-            If keyShift = True And GetEnergy > 0 Then
-                If Map.Tile(CX, CY).Att = 24 Then 'speed tile
-                    CWalkStep = Map.Tile(CX, CY).AttData(1): CWalkStep2 = CWalkStep ^ 2 + 16
-                Else
-                    CWalkStep = 16: CWalkStep2 = CWalkStep ^ 2 + 16
-                End If
-            Else
-                If Map.Tile(CX, CY).Att = 24 Then 'speed tile
-                    CWalkStep = Map.Tile(CX, CY).AttData(0): CWalkStep2 = CWalkStep ^ 2 + 16
-                Else
-                    CWalkStep = 8: CWalkStep2 = CWalkStep ^ 2 + 16
-                End If
-            End If
-        Else
-            CWalkStep = 31: CWalkStep2 = CWalkStep ^ 2 + 16
-        End If
+        SetCharacterSpeed
         If keyUp = True Then
             If CDir = 0 Then
                 If NoDirectionalWalls(CX, CY, 0) Then
@@ -1163,6 +1143,36 @@ Sub CheckKeys()
             End If
         End If
     End If
+End Sub
+
+Sub SetCharacterSpeed()
+    If Character.Access = 0 Or keyAlt = True Then
+        If CWalkStep ^ 2 + 16 <> CWalkStep2 And Character.Access = 0 Then
+            SendSocket Chr$(68) + "Walk Hack"
+            Exit Sub
+        End If
+        
+        If Map.Tile(CX, CY).Att = 24 Then 'speed tile
+            If keyShift = True And GetEnergy > 0 Then
+                CWalkStep = Map.Tile(CX, CY).AttData(1)
+            Else
+                CWalkStep = Map.Tile(CX, CY).AttData(0)
+            End If
+            CSpeedBoostTime = timeGetTime + (CLng(Map.Tile(CX, CY).AttData(2)) * 1000)
+        Else
+            If Tick > CSpeedBoostTime Then
+                If keyShift = True And GetEnergy > 0 Then
+                    CWalkStep = 16
+                Else
+                    CWalkStep = 8
+                End If
+            End If
+        End If
+    Else
+        CWalkStep = 31
+    End If
+    If CWalkStep = 0 Then CWalkStep = 1
+    CWalkStep2 = CWalkStep ^ 2 + 16
 End Sub
 
 Function Exists(filename As String) As Boolean

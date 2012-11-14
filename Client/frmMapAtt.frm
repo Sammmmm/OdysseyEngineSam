@@ -14,6 +14,110 @@ Begin VB.Form frmMapAtt
    ScaleHeight     =   3345
    ScaleWidth      =   4860
    StartUpPosition =   2  'CenterScreen
+   Begin VB.CommandButton btnCancel 
+      Cancel          =   -1  'True
+      Caption         =   "Cancel"
+      Height          =   495
+      Left            =   1800
+      TabIndex        =   1
+      Top             =   2760
+      Width           =   1455
+   End
+   Begin VB.CommandButton btnOk 
+      Caption         =   "Ok"
+      Height          =   495
+      Left            =   3360
+      TabIndex        =   0
+      Top             =   2760
+      Width           =   1455
+   End
+   Begin VB.PictureBox picatt24 
+      Height          =   1815
+      Left            =   120
+      ScaleHeight     =   1755
+      ScaleWidth      =   4035
+      TabIndex        =   83
+      Top             =   600
+      Visible         =   0   'False
+      Width           =   4095
+      Begin VB.HScrollBar sclSpeedDuration 
+         Height          =   255
+         Left            =   1200
+         Max             =   255
+         TabIndex        =   111
+         Top             =   960
+         Width           =   2415
+      End
+      Begin VB.HScrollBar sclWalk 
+         Height          =   255
+         Left            =   1200
+         Max             =   31
+         TabIndex        =   85
+         Top             =   240
+         Value           =   8
+         Width           =   2415
+      End
+      Begin VB.HScrollBar sclRun 
+         Height          =   255
+         Left            =   1200
+         Max             =   31
+         TabIndex        =   84
+         Top             =   600
+         Value           =   16
+         Width           =   2415
+      End
+      Begin VB.Label Label15 
+         Caption         =   "Duration"
+         Height          =   255
+         Left            =   120
+         TabIndex        =   113
+         Top             =   960
+         Width           =   975
+      End
+      Begin VB.Label lblSpeedDuration 
+         Alignment       =   2  'Center
+         Caption         =   "0"
+         Height          =   255
+         Left            =   3600
+         TabIndex        =   112
+         Top             =   960
+         Width           =   375
+      End
+      Begin VB.Label Label11 
+         Caption         =   "Run Speed"
+         Height          =   255
+         Left            =   120
+         TabIndex        =   89
+         Top             =   600
+         Width           =   855
+      End
+      Begin VB.Label Label9 
+         Caption         =   "Walk Speed"
+         Height          =   255
+         Left            =   120
+         TabIndex        =   88
+         Top             =   240
+         Width           =   975
+      End
+      Begin VB.Label lblWalk 
+         Alignment       =   2  'Center
+         Caption         =   "8"
+         Height          =   255
+         Left            =   3600
+         TabIndex        =   87
+         Top             =   240
+         Width           =   375
+      End
+      Begin VB.Label lblRun 
+         Alignment       =   2  'Center
+         Caption         =   "16"
+         Height          =   255
+         Left            =   3600
+         TabIndex        =   86
+         Top             =   600
+         Width           =   375
+      End
+   End
    Begin VB.PictureBox picAtt17 
       Height          =   2055
       Left            =   120
@@ -517,23 +621,6 @@ Begin VB.Form frmMapAtt
          Top             =   120
          Width           =   495
       End
-   End
-   Begin VB.CommandButton btnCancel 
-      Cancel          =   -1  'True
-      Caption         =   "Cancel"
-      Height          =   495
-      Left            =   1800
-      TabIndex        =   1
-      Top             =   2760
-      Width           =   1455
-   End
-   Begin VB.CommandButton btnOk 
-      Caption         =   "Ok"
-      Height          =   495
-      Left            =   3360
-      TabIndex        =   0
-      Top             =   2760
-      Width           =   1455
    End
    Begin VB.PictureBox picAtt23 
       Height          =   1815
@@ -1084,68 +1171,6 @@ Begin VB.Form frmMapAtt
          Width           =   975
       End
    End
-   Begin VB.PictureBox picatt24 
-      Height          =   1815
-      Left            =   120
-      ScaleHeight     =   1755
-      ScaleWidth      =   4035
-      TabIndex        =   83
-      Top             =   600
-      Visible         =   0   'False
-      Width           =   4095
-      Begin VB.HScrollBar sclWalk 
-         Height          =   255
-         Left            =   1200
-         Max             =   31
-         TabIndex        =   85
-         Top             =   240
-         Value           =   8
-         Width           =   2415
-      End
-      Begin VB.HScrollBar sclRun 
-         Height          =   255
-         Left            =   1200
-         Max             =   31
-         TabIndex        =   84
-         Top             =   600
-         Value           =   16
-         Width           =   2415
-      End
-      Begin VB.Label Label11 
-         Caption         =   "Run Speed"
-         Height          =   255
-         Left            =   120
-         TabIndex        =   89
-         Top             =   600
-         Width           =   855
-      End
-      Begin VB.Label Label9 
-         Caption         =   "Walk Speed"
-         Height          =   255
-         Left            =   120
-         TabIndex        =   88
-         Top             =   240
-         Width           =   975
-      End
-      Begin VB.Label lblWalk 
-         Alignment       =   2  'Center
-         Caption         =   "8"
-         Height          =   255
-         Left            =   3600
-         TabIndex        =   87
-         Top             =   240
-         Width           =   375
-      End
-      Begin VB.Label lblRun 
-         Alignment       =   2  'Center
-         Caption         =   "16"
-         Height          =   255
-         Left            =   3600
-         TabIndex        =   86
-         Top             =   600
-         Width           =   375
-      End
-   End
    Begin VB.Label lblAtt 
       Alignment       =   2  'Center
       BeginProperty Font 
@@ -1282,7 +1307,7 @@ Private Sub btnOk_Click()
     Case 24 'speed tile
         CurAttData(0) = sclWalk
         CurAttData(1) = sclRun
-        CurAttData(2) = 0
+        CurAttData(2) = sclSpeedDuration
         CurAttData(3) = 0
     Case 25 'sprite half tile
         CurAttData(0) = sclCutOff
@@ -1293,6 +1318,7 @@ Private Sub btnOk_Click()
         CurAttData(0) = sclShiftX
         CurAttData(1) = sclShiftY
         CurAttData(2) = chkShiftGround + chkShiftGround2 * 2 + chkShiftBG * 4 + chkShiftBG2 * 8 + chkShiftFG * 16 + chkShiftFG2 * 32
+        CurAttData(3) = 0
     End Select
     Unload Me
 End Sub
@@ -1392,6 +1418,7 @@ Private Sub Form_Load()
         If CurAtt = 24 Then
             sclWalk = CurAttData(0)
             sclRun = CurAttData(1)
+            sclSpeedDuration = CurAttData(2)
         End If
     Case 25 'sprite half tile
         lblAtt = "25 - Sprite Half Tile"
@@ -1418,7 +1445,6 @@ Private Sub Form_Load()
         End If
     End Select
 End Sub
-
 
 Private Sub lblAtt3Key_Change()
     If Val(lblAtt3Key) > 0 And Val(lblAtt3Key) <= MaxObjects Then sclAtt3Key = Val(lblAtt3Key)
@@ -1552,6 +1578,10 @@ End Sub
 
 Private Sub sclShiftY_Change()
     lblShiftY = Str(sclShiftY - 128)
+End Sub
+
+Private Sub sclSpeedDuration_Change()
+    lblSpeedDuration = sclSpeedDuration
 End Sub
 
 Private Sub sclWalk_Change()
