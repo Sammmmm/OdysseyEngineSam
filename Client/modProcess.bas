@@ -178,6 +178,7 @@ Sub ProcessString(PacketID As Long, St As String)
                     End With
                 Next A
             End With
+            
             frmWait.Show
             frmWait.lblStatus = "Receiving Game Data ..."
             frmWait.btnCancel.Visible = True
@@ -812,7 +813,7 @@ Sub ProcessString(PacketID As Long, St As String)
                     .sclPicture = 1
                 End If
                 B = Asc(Mid$(St, 3, 1))
-                For C = 0 To 6
+                For C = 0 To 7
                     If ExamineBit(CByte(B), CByte(C)) = True Then
                         frmObject.chkFlags(C) = 1
                     Else

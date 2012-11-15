@@ -5086,6 +5086,7 @@ Private Sub lblMenu_MouseUp(index As Integer, Button As Integer, Shift As Intege
 End Sub
 
 Private Sub picInventory_DblClick()
+    Dim equipped As Long
     If Character.IsDead = True Then
         Exit Sub
     End If
@@ -5127,19 +5128,21 @@ Private Sub picInventory_DblClick()
             If CurInvObj <= 20 Then
                 With Character.Inv(CurInvObj)
                     If .EquippedNum > 0 Then
-                        If HasFullStats = False Then
-                            PrintChat "You must recover first!", YELLOW
-                            Exit Sub
-                        End If
+                            If HasFullStats = False Then
+                                PrintChat "You must recover first!", YELLOW
+                                Exit Sub
+                            End If
                         SendSocket Chr$(11) + Chr$(6)    'Stop Using Obj
                     Else
                         If Not Character.Inv(CurInvObj).Object = 0 Then
+                            
                             Select Case Object(CLng(Character.Inv(CurInvObj).Object)).Type
                             Case 1, 2, 3, 4
-                                If Character.EquippedObject(Object(CLng(Character.Inv(CurInvObj).Object)).Type).Object = 0 Then
+                                equipped = Character.EquippedObject(Object(CLng(Character.Inv(CurInvObj).Object)).Type).Object
+                                If equipped = 0 Then
                                     SendSocket Chr$(10) + Chr$(CurInvObj)    'Use Obj
                                 Else
-                                    If HasFullStats Then
+                                    If HasFullStats Or ExamineBit(Object(equipped).flags, 7) = True Then
                                         SendSocket Chr$(10) + Chr$(CurInvObj)    'Use Obj
                                     Else
                                         PrintChat "You must recover first!", YELLOW
@@ -5149,7 +5152,7 @@ Private Sub picInventory_DblClick()
                                 If Character.EquippedObject(5).Object = 0 Then
                                     SendSocket Chr$(10) + Chr$(CurInvObj)    'Use Obj
                                 Else
-                                    If HasFullStats Then
+                                    If HasFullStats Or ExamineBit(Object(Character.EquippedObject(5).Object).flags, 7) = True Then
                                         SendSocket Chr$(10) + Chr$(CurInvObj)    'Use Obj
                                     Else
                                         PrintChat "You must recover first!", YELLOW
@@ -5163,7 +5166,7 @@ Private Sub picInventory_DblClick()
                 End With
             Else
                 If Character.EquippedObject(CurInvObj - 20).Object > 0 Then
-                    If HasFullStats = False Then
+                    If HasFullStats = False And ExamineBit(Object(Character.EquippedObject(CurInvObj - 20).Object).flags, 7) = False Then
                         PrintChat "You must recover first!", YELLOW
                         Exit Sub
                     End If

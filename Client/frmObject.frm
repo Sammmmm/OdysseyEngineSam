@@ -2,17 +2,17 @@ VERSION 5.00
 Begin VB.Form frmObject 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "The Odyssey Online Classic [Editing Object]"
-   ClientHeight    =   6015
+   ClientHeight    =   6225
    ClientLeft      =   105
    ClientTop       =   330
-   ClientWidth     =   5865
+   ClientWidth     =   5850
    ControlBox      =   0   'False
    Icon            =   "frmObject.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   6015
-   ScaleWidth      =   5865
+   ScaleHeight     =   6225
+   ScaleWidth      =   5850
    StartUpPosition =   2  'CenterScreen
    Begin VB.TextBox txtSellPrice 
       Alignment       =   2  'Center
@@ -20,7 +20,7 @@ Begin VB.Form frmObject
       Left            =   4920
       TabIndex        =   52
       Text            =   "0"
-      Top             =   4920
+      Top             =   5280
       Width           =   855
    End
    Begin VB.CheckBox chkFlags 
@@ -37,7 +37,7 @@ Begin VB.Form frmObject
       Left            =   960
       Max             =   30000
       TabIndex        =   50
-      Top             =   4920
+      Top             =   5280
       Value           =   1
       Width           =   3855
    End
@@ -46,7 +46,7 @@ Begin VB.Form frmObject
       Left            =   1320
       Max             =   255
       TabIndex        =   47
-      Top             =   3960
+      Top             =   4320
       Value           =   1
       Width           =   3495
    End
@@ -65,7 +65,7 @@ Begin VB.Form frmObject
       Index           =   3
       Left            =   3840
       TabIndex        =   44
-      Top             =   4320
+      Top             =   4680
       Width           =   855
    End
    Begin VB.CheckBox chkClass 
@@ -74,7 +74,7 @@ Begin VB.Form frmObject
       Index           =   2
       Left            =   3000
       TabIndex        =   43
-      Top             =   4320
+      Top             =   4680
       Width           =   855
    End
    Begin VB.CheckBox chkClass 
@@ -83,7 +83,7 @@ Begin VB.Form frmObject
       Index           =   0
       Left            =   1320
       TabIndex        =   42
-      Top             =   4320
+      Top             =   4680
       Width           =   855
    End
    Begin VB.CheckBox chkClass 
@@ -92,7 +92,7 @@ Begin VB.Form frmObject
       Index           =   1
       Left            =   2160
       TabIndex        =   41
-      Top             =   4320
+      Top             =   4680
       Width           =   735
    End
    Begin VB.CommandButton btnCancel 
@@ -100,7 +100,7 @@ Begin VB.Form frmObject
       Height          =   495
       Left            =   2760
       TabIndex        =   22
-      Top             =   5400
+      Top             =   5640
       Width           =   1455
    End
    Begin VB.CommandButton btnOk 
@@ -108,7 +108,7 @@ Begin VB.Form frmObject
       Height          =   495
       Left            =   4320
       TabIndex        =   21
-      Top             =   5400
+      Top             =   5640
       Width           =   1455
    End
    Begin VB.TextBox txtName 
@@ -308,12 +308,21 @@ Begin VB.Form frmObject
       Top             =   3600
       Width           =   1215
    End
+   Begin VB.CheckBox chkFlags 
+      Caption         =   "Can unequip without full energy"
+      Height          =   255
+      Index           =   7
+      Left            =   120
+      TabIndex        =   53
+      Top             =   3840
+      Width           =   3015
+   End
    Begin VB.Label Label6 
       Caption         =   "Sell Price:"
       Height          =   255
       Left            =   120
       TabIndex        =   49
-      Top             =   4920
+      Top             =   5280
       Width           =   735
    End
    Begin VB.Label lblLevel 
@@ -323,7 +332,7 @@ Begin VB.Form frmObject
       Height          =   255
       Left            =   4920
       TabIndex        =   48
-      Top             =   3960
+      Top             =   4320
       Width           =   855
    End
    Begin VB.Label lblLevelReq 
@@ -331,7 +340,7 @@ Begin VB.Form frmObject
       Height          =   255
       Left            =   120
       TabIndex        =   46
-      Top             =   3960
+      Top             =   4320
       Width           =   1095
    End
    Begin VB.Label Label1 
@@ -541,7 +550,7 @@ Begin VB.Form frmObject
       Height          =   495
       Left            =   120
       TabIndex        =   23
-      Top             =   4320
+      Top             =   4680
       Width           =   855
    End
 End
@@ -559,7 +568,7 @@ End Sub
 Private Sub btnOk_Click()
     Dim flags As Byte, A As Long, ClassReq As Byte
 
-    For A = 0 To 6
+    For A = 0 To 7
         If chkFlags(A) = 1 Then
             SetBit flags, CByte(A)
         Else
